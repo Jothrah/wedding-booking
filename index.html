@@ -5,52 +5,62 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>سبوت لايت لحجز الزواجات</title>
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
-      font-family: Arial, sans-serif;
-      background: #f7f7f8;
       margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f6f7fb;
       color: #222;
     }
 
     .container {
-      max-width: 600px;
-      margin: auto;
-      padding: 15px;
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 16px;
     }
 
     .card {
       background: #fff;
-      padding: 15px;
-      border-radius: 12px;
-      margin-bottom: 15px;
-      box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+      border-radius: 16px;
+      padding: 18px;
+      margin-bottom: 16px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
     }
 
-    h2 {
+    h1, h2, h3 {
       margin-top: 0;
     }
 
     p {
-      line-height: 1.7;
+      line-height: 1.8;
       color: #555;
+    }
+
+    .section-title {
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #eee;
     }
 
     label {
       display: block;
-      margin-top: 10px;
-      margin-bottom: 6px;
       font-weight: bold;
+      margin: 12px 0 6px;
     }
 
     input,
     textarea,
+    select,
     button {
       width: 100%;
-      padding: 12px;
-      border-radius: 8px;
-      border: 1px solid #ddd;
+      padding: 13px;
+      border: 1px solid #d9d9d9;
+      border-radius: 12px;
       font-size: 16px;
-      box-sizing: border-box;
+      background: #fff;
     }
 
     textarea {
@@ -58,17 +68,58 @@
       resize: vertical;
     }
 
-    button {
-      background: #111;
-      color: #fff;
-      font-weight: bold;
-      margin-top: 14px;
-      cursor: pointer;
-      border: none;
+    .grid {
+      display: grid;
+      gap: 12px;
     }
 
-    button:hover {
+    @media (min-width: 700px) {
+      .grid-2 {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .hint {
+      font-size: 14px;
+      color: #777;
+      margin-top: 6px;
+      line-height: 1.7;
+    }
+
+    .box {
+      background: #fafafa;
+      border: 1px solid #eee;
+      border-radius: 14px;
+      padding: 14px;
+      margin-top: 14px;
+    }
+
+    .btn {
+      background: #111;
+      color: #fff;
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 18px;
+    }
+
+    .btn:hover {
       opacity: 0.95;
+    }
+
+    .small-note {
+      background: #fff8e6;
+      border: 1px solid #f1df9a;
+      color: #6b5b17;
+      border-radius: 12px;
+      padding: 12px;
+      line-height: 1.8;
+      font-size: 14px;
+      margin-top: 10px;
+    }
+
+    .readonly-map {
+      background: #f2f4f7;
     }
   </style>
 </head>
@@ -76,26 +127,143 @@
   <div class="container">
 
     <div class="card">
-      <h2>سبوت لايت لحجز الزواجات</h2>
-      <p>اختر التاريخ المناسب. الحجز يكون على أساس يوم كامل فقط، والحد الأقصى حجزين في اليوم.</p>
+      <h1>سبوت لايت لحجز الزواجات</h1>
+      <p>
+        يرجى تعبئة بيانات المناسبة كاملة. الحجز يكون على أساس يوم كامل فقط،
+        والنسخة الحالية للتجربة، والحد الأقصى حجزين في اليوم.
+      </p>
+      <div class="small-note">
+        ملاحظة: الخريطة هنا حاليًا عبارة عن خانة لإدخال الإحداثيات ورابط الموقع من Google Maps.
+        لاحقًا نقدر نضيف خريطة تفاعلية فعلية.
+      </div>
     </div>
 
     <form class="card" onsubmit="handleBooking(event)">
-      <label for="name">اسم العميل</label>
-      <input id="name" type="text" required />
+      <h2 class="section-title">بيانات العميل</h2>
 
-      <label for="phone">رقم الجوال</label>
-      <input id="phone" type="text" required />
+      <div class="grid grid-2">
+        <div>
+          <label for="customerName">اسم العميل</label>
+          <input id="customerName" type="text" required />
+        </div>
 
-      <label for="date">تاريخ الزفاف</label>
-      <input id="date" type="date" required />
+        <div>
+          <label for="customerPhone">رقم الجوال</label>
+          <input id="customerPhone" type="tel" required />
+        </div>
+      </div>
 
-      <label for="notes">ملاحظات</label>
-      <textarea id="notes"></textarea>
+      <div class="grid grid-2">
+        <div>
+          <label for="eventDate">يوم الحجز / تاريخ المناسبة</label>
+          <input id="eventDate" type="date" required />
+        </div>
 
-      <button type="submit">تأكيد الحجز</button>
+        <div>
+          <label for="eventType">نوع المناسبة</label>
+          <select id="eventType" required>
+            <option value="">اختر المناسبة</option>
+            <option>زواج</option>
+            <option>ملكة</option>
+            <option>شبكة</option>
+            <option>مناسبة خاصة</option>
+          </select>
+        </div>
+      </div>
+
+      <label for="generalNotes">ملاحظات عامة</label>
+      <textarea id="generalNotes" placeholder="اكتب أي تفاصيل إضافية هنا"></textarea>
+
+      <div class="box">
+        <h3>الحلاق</h3>
+
+        <div class="grid grid-2">
+          <div>
+            <label for="barberTime">وقت الحلاق</label>
+            <input id="barberTime" type="time" />
+          </div>
+
+          <div>
+            <label for="barberPlace">مكان الحلاق</label>
+            <input id="barberPlace" type="text" placeholder="مثال: صالون أو منزل" />
+          </div>
+        </div>
+
+        <label for="barberCoords">إحداثيات موقع الحلاق</label>
+        <input id="barberCoords" class="readonly-map" type="text" placeholder="مثال: 26.4207, 50.0888" />
+
+        <label for="barberMapLink">رابط موقع الحلاق من Google Maps</label>
+        <input id="barberMapLink" type="url" placeholder="الصق رابط الموقع من قوقل ماب" />
+      </div>
+
+      <div class="box">
+        <h3>السباحة</h3>
+
+        <div class="grid grid-2">
+          <div>
+            <label for="swimTime">وقت السباحة</label>
+            <input id="swimTime" type="time" />
+          </div>
+
+          <div>
+            <label for="resortName">اسم الاستراحة</label>
+            <input id="resortName" type="text" placeholder="اكتب اسم الاستراحة" />
+          </div>
+        </div>
+
+        <label for="resortLocation">موقع الاستراحة</label>
+        <input id="resortLocation" type="text" placeholder="اسم الموقع أو الحي" />
+
+        <label for="resortCoords">إحداثيات الاستراحة</label>
+        <input id="resortCoords" class="readonly-map" type="text" placeholder="مثال: 26.3000, 50.2100" />
+
+        <label for="resortMapLink">رابط موقع الاستراحة من Google Maps</label>
+        <input id="resortMapLink" type="url" placeholder="الصق رابط الموقع من قوقل ماب" />
+      </div>
+
+      <div class="box">
+        <h3>زفة المنزل</h3>
+
+        <label for="homeZaffaLocation">موقع زفة المنزل</label>
+        <input id="homeZaffaLocation" type="text" placeholder="اكتب وصف الموقع" />
+
+        <label for="homeZaffaCoords">إحداثيات موقع زفة المنزل</label>
+        <input id="homeZaffaCoords" class="readonly-map" type="text" placeholder="مثال: 26.4100, 50.1200" />
+
+        <label for="homeZaffaMapLink">رابط موقع زفة المنزل من Google Maps</label>
+        <input id="homeZaffaMapLink" type="url" placeholder="الصق رابط الموقع من قوقل ماب" />
+      </div>
+
+      <div class="box">
+        <h3>حفل الزفاف</h3>
+
+        <div class="grid grid-2">
+          <div>
+            <label for="hallName">اسم القاعة</label>
+            <input id="hallName" type="text" placeholder="اكتب اسم القاعة" />
+          </div>
+
+          <div>
+            <label for="weddingTime">وقت حفل الزفاف</label>
+            <input id="weddingTime" type="time" />
+          </div>
+        </div>
+
+        <label for="hallLocation">موقع الحفل</label>
+        <input id="hallLocation" type="text" placeholder="اكتب وصف الموقع أو الحي" />
+
+        <label for="hallCoords">إحداثيات موقع الحفل</label>
+        <input id="hallCoords" class="readonly-map" type="text" placeholder="مثال: 26.3900, 50.1700" />
+
+        <label for="hallMapLink">رابط موقع الحفل من Google Maps</label>
+        <input id="hallMapLink" type="url" placeholder="الصق رابط الموقع من قوقل ماب" />
+      </div>
+
+      <button class="btn" type="submit">تأكيد الحجز</button>
+      <div class="hint">
+        هذه النسخة للتجربة. الحجز الآن يُخزَّن محليًا في المتصفح فقط.
+      </div>
     </form>
-
   </div>
 
   <script>
@@ -104,21 +272,26 @@
     function handleBooking(e) {
       e.preventDefault();
 
-      const date = document.getElementById("date").value;
+      const eventDate = document.getElementById("eventDate").value;
 
-      if (!bookings[date]) {
-        bookings[date] = 0;
-      }
-
-      if (bookings[date] >= 2) {
-        alert("هذا اليوم محجوز بالكامل ❌ اختر تاريخ آخر");
+      if (!eventDate) {
+        alert("يرجى اختيار تاريخ المناسبة");
         return;
       }
 
-      bookings[date] += 1;
+      if (!bookings[eventDate]) {
+        bookings[eventDate] = 0;
+      }
+
+      if (bookings[eventDate] >= 2) {
+        alert("هذا اليوم محجوز بالكامل ❌ اختر تاريخًا آخر");
+        return;
+      }
+
+      bookings[eventDate] += 1;
       localStorage.setItem("bookings", JSON.stringify(bookings));
 
-      alert("تم الحجز بنجاح ✅");
+      alert("تم تسجيل الحجز بنجاح ✅");
     }
   </script>
 </body>
