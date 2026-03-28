@@ -5,9 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>سبوت لايت لحجز الزواجات</title>
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
@@ -17,7 +15,7 @@
     }
 
     .container {
-      max-width: 760px;
+      max-width: 900px;
       margin: 0 auto;
       padding: 16px;
     }
@@ -121,6 +119,131 @@
     .readonly-map {
       background: #f2f4f7;
     }
+
+    .calendar-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 12px;
+      margin-bottom: 10px;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      color: #444;
+    }
+
+    .legend-color {
+      width: 18px;
+      height: 18px;
+      border-radius: 6px;
+      border: 1px solid rgba(0,0,0,.08);
+    }
+
+    .legend-green { background: #dff7e3; }
+    .legend-red { background: #ffdede; }
+    .legend-selected { background: #111; }
+
+    .calendar-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .calendar-nav {
+      width: auto;
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: 1px solid #ddd;
+      background: #fff;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .calendar-title {
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    .weekday-row,
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 8px;
+    }
+
+    .weekday {
+      text-align: center;
+      font-size: 13px;
+      color: #666;
+      padding: 8px 0;
+      font-weight: bold;
+    }
+
+    .calendar-day,
+    .calendar-empty {
+      min-height: 62px;
+      border-radius: 12px;
+    }
+
+    .calendar-empty {
+      background: transparent;
+    }
+
+    .calendar-day {
+      border: 1px solid #ddd;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      cursor: pointer;
+      user-select: none;
+      transition: .15s;
+      padding: 6px;
+      text-align: center;
+    }
+
+    .calendar-day.available {
+      background: #dff7e3;
+      color: #176b2f;
+    }
+
+    .calendar-day.booked {
+      background: #ffdede;
+      color: #a11d1d;
+      cursor: not-allowed;
+    }
+
+    .calendar-day.selected {
+      background: #111;
+      color: #fff;
+      border-color: #111;
+    }
+
+    .calendar-day:hover.available {
+      transform: translateY(-1px);
+    }
+
+    .selected-date-box {
+      margin-top: 12px;
+      background: #f5f7fa;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 12px;
+      font-weight: bold;
+    }
+
+    .time-note {
+      margin-top: 6px;
+      font-size: 14px;
+      color: #666;
+      line-height: 1.7;
+    }
   </style>
 </head>
 <body>
@@ -130,7 +253,7 @@
       <h1>سبوت لايت لحجز الزواجات</h1>
       <p>
         يرجى تعبئة بيانات المناسبة كاملة. الحجز يكون على أساس يوم كامل فقط،
-        والنسخة الحالية للتجربة، والحد الأقصى حجزين في اليوم.
+        والنسخة الحالية للتجربة، والحد الأقصى حجز واحد في اليوم.
       </p>
       <div class="small-note">
         ملاحظة: الخريطة هنا حاليًا عبارة عن خانة لإدخال الإحداثيات ورابط الموقع من Google Maps.
@@ -153,12 +276,36 @@
         </div>
       </div>
 
-      <div class="grid grid-2">
-        <div>
-          <label for="eventDate">يوم الحجز / تاريخ المناسبة</label>
-          <input id="eventDate" type="date" required />
+      <label>تاريخ المناسبة</label>
+      <div class="calendar-legend">
+        <div class="legend-item"><span class="legend-color legend-green"></span> متاح</div>
+        <div class="legend-item"><span class="legend-color legend-red"></span> غير متاح</div>
+        <div class="legend-item"><span class="legend-color legend-selected"></span> التاريخ المختار</div>
+      </div>
+
+      <div class="box">
+        <div class="calendar-header">
+          <button class="calendar-nav" type="button" onclick="changeMonth(-1)">السابق</button>
+          <div class="calendar-title" id="calendarTitle"></div>
+          <button class="calendar-nav" type="button" onclick="changeMonth(1)">التالي</button>
         </div>
 
+        <div class="weekday-row">
+          <div class="weekday">الأحد</div>
+          <div class="weekday">الاثنين</div>
+          <div class="weekday">الثلاثاء</div>
+          <div class="weekday">الأربعاء</div>
+          <div class="weekday">الخميس</div>
+          <div class="weekday">الجمعة</div>
+          <div class="weekday">السبت</div>
+        </div>
+
+        <div class="calendar-grid" id="calendarGrid"></div>
+        <input id="eventDate" type="hidden" required />
+        <div class="selected-date-box" id="selectedDateBox">لم يتم اختيار تاريخ بعد</div>
+      </div>
+
+      <div class="grid grid-2">
         <div>
           <label for="eventType">نوع المناسبة</label>
           <select id="eventType" required>
@@ -181,6 +328,7 @@
           <div>
             <label for="barberTime">وقت الحلاق</label>
             <input id="barberTime" type="time" />
+            <div class="time-note">سوف نكون متواجدين في الموقع قبل الموعد ب١٥ دقيقه</div>
           </div>
 
           <div>
@@ -203,21 +351,22 @@
           <div>
             <label for="swimTime">وقت السباحة</label>
             <input id="swimTime" type="time" />
+            <div class="time-note">سوف نكون متواجدين في الموقع قبل الموعد ب١٥ دقيقه</div>
           </div>
 
           <div>
-            <label for="resortName">اسم الاستراحة</label>
-            <input id="resortName" type="text" placeholder="اكتب اسم الاستراحة" />
+            <label for="resortName">اسم الاستراحه</label>
+            <input id="resortName" type="text" placeholder="اكتب اسم الاستراحه" />
           </div>
         </div>
 
-        <label for="resortLocation">موقع الاستراحة</label>
+        <label for="resortLocation">موقع الاستراحه</label>
         <input id="resortLocation" type="text" placeholder="اسم الموقع أو الحي" />
 
-        <label for="resortCoords">إحداثيات الاستراحة</label>
+        <label for="resortCoords">إحداثيات الاستراحه</label>
         <input id="resortCoords" class="readonly-map" type="text" placeholder="مثال: 26.3000, 50.2100" />
 
-        <label for="resortMapLink">رابط موقع الاستراحة من Google Maps</label>
+        <label for="resortMapLink">رابط موقع الاستراحه من Google Maps</label>
         <input id="resortMapLink" type="url" placeholder="الصق رابط الموقع من قوقل ماب" />
       </div>
 
@@ -239,13 +388,14 @@
 
         <div class="grid grid-2">
           <div>
-            <label for="hallName">اسم القاعة</label>
-            <input id="hallName" type="text" placeholder="اكتب اسم القاعة" />
+            <label for="hallName">اسم القاعه</label>
+            <input id="hallName" type="text" placeholder="اكتب اسم القاعه" />
           </div>
 
           <div>
             <label for="weddingTime">وقت حفل الزفاف</label>
             <input id="weddingTime" type="time" />
+            <div class="time-note">سوف نكون متواجدين في صالة حفل الزفاف قبل الموعد بساعه كامله</div>
           </div>
         </div>
 
@@ -268,6 +418,95 @@
 
   <script>
     let bookings = JSON.parse(localStorage.getItem("bookings") || "{}");
+    const monthNames = [
+      "يناير", "فبراير", "مارس", "أبريل", "مايو", "يونيو",
+      "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"
+    ];
+
+    const today = new Date();
+    let currentMonth = today.getMonth();
+    let currentYear = today.getFullYear();
+    let selectedDate = "";
+
+    function pad(num) {
+      return String(num).padStart(2, "0");
+    }
+
+    function formatDate(year, month, day) {
+      return `${year}-${pad(month + 1)}-${pad(day)}`;
+    }
+
+    function isPastDate(year, month, day) {
+      const checkDate = new Date(year, month, day);
+      const cleanToday = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+      return checkDate < cleanToday;
+    }
+
+    function renderCalendar() {
+      const calendarGrid = document.getElementById("calendarGrid");
+      const calendarTitle = document.getElementById("calendarTitle");
+      const selectedDateBox = document.getElementById("selectedDateBox");
+
+      calendarTitle.textContent = `${monthNames[currentMonth]} ${currentYear}`;
+      calendarGrid.innerHTML = "";
+
+      const firstDay = new Date(currentYear, currentMonth, 1).getDay();
+      const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+
+      for (let i = 0; i < firstDay; i++) {
+        const emptyCell = document.createElement("div");
+        emptyCell.className = "calendar-empty";
+        calendarGrid.appendChild(emptyCell);
+      }
+
+      for (let day = 1; day <= daysInMonth; day++) {
+        const dateKey = formatDate(currentYear, currentMonth, day);
+        const dayCell = document.createElement("div");
+        dayCell.textContent = day;
+        dayCell.className = "calendar-day";
+
+        const booked = bookings[dateKey] >= 1;
+        const past = isPastDate(currentYear, currentMonth, day);
+
+        if (booked || past) {
+          dayCell.classList.add("booked");
+        } else {
+          dayCell.classList.add("available");
+          dayCell.addEventListener("click", function () {
+            selectedDate = dateKey;
+            document.getElementById("eventDate").value = selectedDate;
+            selectedDateBox.textContent = `التاريخ المختار: ${selectedDate}`;
+            renderCalendar();
+          });
+        }
+
+        if (selectedDate === dateKey) {
+          dayCell.classList.add("selected");
+        }
+
+        calendarGrid.appendChild(dayCell);
+      }
+
+      if (!selectedDate) {
+        selectedDateBox.textContent = "لم يتم اختيار تاريخ بعد";
+      }
+    }
+
+    function changeMonth(step) {
+      currentMonth += step;
+
+      if (currentMonth < 0) {
+        currentMonth = 11;
+        currentYear--;
+      }
+
+      if (currentMonth > 11) {
+        currentMonth = 0;
+        currentYear++;
+      }
+
+      renderCalendar();
+    }
 
     function handleBooking(e) {
       e.preventDefault();
@@ -275,7 +514,7 @@
       const eventDate = document.getElementById("eventDate").value;
 
       if (!eventDate) {
-        alert("يرجى اختيار تاريخ المناسبة");
+        alert("يرجى اختيار تاريخ المناسبة من التقويم");
         return;
       }
 
@@ -283,16 +522,22 @@
         bookings[eventDate] = 0;
       }
 
-      if (bookings[eventDate] >= 2) {
-        alert("هذا اليوم محجوز بالكامل ❌ اختر تاريخًا آخر");
+      if (bookings[eventDate] >= 1) {
+        alert("هذا اليوم غير متاح ❌ اختر تاريخًا آخر");
         return;
       }
 
-      bookings[eventDate] += 1;
+      bookings[eventDate] = 1;
       localStorage.setItem("bookings", JSON.stringify(bookings));
 
       alert("تم تسجيل الحجز بنجاح ✅");
+      selectedDate = "";
+      document.getElementById("eventDate").value = "";
+      e.target.reset();
+      renderCalendar();
     }
+
+    renderCalendar();
   </script>
 </body>
 </html>
