@@ -320,19 +320,23 @@
       <div class="grid grid-2">
         <div>
           <label for="eventType">نوع المناسبة</label>
-          <select id="eventType" name="نوع المناسبة" required>
+          <select id="eventType" name="نوع المناسبة" required onchange="toggleEventSections()">
             <option value="">اختر المناسبة</option>
-            <option>زواج</option>
-            <option>ملكة</option>
-            <option>شبكة</option>
-            <option>مناسبة خاصة</option>
+            <option value="زواج">زواج</option>
+            <option value="ملكة">ملكة</option>
+            <option value="حفل تخرج">حفل تخرج</option>
+            <option value="مناسبة خاصة">مناسبة خاصة</option>
           </select>
         </div>
       </div>
 
+      <label for="customEventType">وصف نوع المناسبة</label>
+      <input id="customEventType" name="وصف نوع المناسبة" type="text" required placeholder="اكتب نوع المناسبة بشكل واضح" />
+
       <label for="generalNotes">ملاحظات عامة</label>
       <textarea id="generalNotes" name="ملاحظات عامة" placeholder="اكتب أي تفاصيل إضافية هنا"></textarea>
 
+      <div id="marriageSections">
       <div class="box">
         <h3>الحلاق</h3>
 
@@ -405,6 +409,74 @@
             <label for="hallName">اسم القاعه</label>
             <input id="hallName" name="اسم القاعة" type="text" placeholder="اكتب اسم القاعه" />
           </div>
+
+          <div>
+            <label for="weddingTime">وقت حفل الزفاف</label>
+            <input id="weddingTime" name="وقت حفل الزفاف" type="time" />
+            <div class="time-note">سوف نكون متواجدين في صالة حفل الزفاف قبل الموعد بساعه كامله
+نرجو منك كتابة الموعد الصحيح بدقه والالتزام بالموعد المحدد</div>
+          </div>
+        </div>
+
+        <label for="hallLocation">موقع الحفل</label>
+        <input id="hallLocation" name="موقع الحفل" type="text" placeholder="اكتب وصف الموقع أو الحي" />
+
+        <label for="hallCoords">إحداثيات موقع الحفل</label>
+        <input id="hallCoords" name="إحداثيات موقع الحفل" class="readonly-map" type="text" placeholder="مثال: 26.3900, 50.1700" />
+
+        <label for="hallMapLink">رابط موقع الحفل من Google Maps</label>
+        <input id="hallMapLink" name="رابط موقع الحفل" type="url" placeholder="الصق رابط الموقع من قوقل ماب" />
+      </div>
+      </div>
+
+      <div id="malkaSection" class="box" style="display:none;">
+        <h3>بيانات الملكة</h3>
+        <div class="grid grid-2">
+          <div>
+            <label for="malkaTime">وقت الملكة</label>
+            <input id="malkaTime" name="وقت الملكة" type="time" />
+          </div>
+          <div>
+            <label for="malkaLocation">موقع الملكة</label>
+            <input id="malkaLocation" name="موقع الملكة" type="text" placeholder="اكتب موقع الملكة" />
+          </div>
+        </div>
+        <label for="malkaMapLink">رابط موقع الملكة من Google Maps</label>
+        <input id="malkaMapLink" name="رابط موقع الملكة" type="url" placeholder="الصق رابط الموقع من قوقل ماب" />
+      </div>
+
+      <div id="graduationSection" class="box" style="display:none;">
+        <h3>بيانات حفل التخرج</h3>
+        <div class="grid grid-2">
+          <div>
+            <label for="graduationTime">وقت حفل التخرج</label>
+            <input id="graduationTime" name="وقت حفل التخرج" type="time" />
+          </div>
+          <div>
+            <label for="graduationPlace">مكان حفل التخرج</label>
+            <input id="graduationPlace" name="مكان حفل التخرج" type="text" placeholder="اكتب مكان الحفل" />
+          </div>
+        </div>
+        <label for="graduationMapLink">رابط موقع حفل التخرج من Google Maps</label>
+        <input id="graduationMapLink" name="رابط موقع حفل التخرج" type="url" placeholder="الصق رابط الموقع من قوقل ماب" />
+      </div>
+
+      <div id="specialSection" class="box" style="display:none;">
+        <h3>بيانات المناسبة الخاصة</h3>
+        <div class="grid grid-2">
+          <div>
+            <label for="specialTime">وقت المناسبة الخاصة</label>
+            <input id="specialTime" name="وقت المناسبة الخاصة" type="time" />
+          </div>
+          <div>
+            <label for="specialPlace">مكان المناسبة الخاصة</label>
+            <input id="specialPlace" name="مكان المناسبة الخاصة" type="text" placeholder="اكتب مكان المناسبة" />
+          </div>
+        </div>
+        <label for="specialMapLink">رابط موقع المناسبة الخاصة من Google Maps</label>
+        <input id="specialMapLink" name="رابط موقع المناسبة الخاصة" type="url" placeholder="الصق رابط الموقع من قوقل ماب" />
+        <div class="small-note" style="margin-top:12px;">في حال اختيار مناسبة خاصة سيتم استلام الطلب مبدئيًا فقط، ولن يتم تأكيد الحجز إلا بعد التواصل مع العميل ومراجعة نوع المناسبة.</div>
+      </div>
 
           <div>
             <label for="weddingTime">وقت حفل الزفاف</label>
@@ -510,6 +582,7 @@
             document.getElementById("eventDate").value = selectedDate;
             selectedDateBox.textContent = `التاريخ المختار: ${selectedDate}`;
             renderCalendar();
+    toggleEventSections();
           });
         }
 
@@ -541,11 +614,31 @@
       renderCalendar();
     }
 
+    function toggleEventSections() {
+      const type = document.getElementById("eventType").value;
+      const marriage = document.getElementById("marriageSections");
+      const malka = document.getElementById("malkaSection");
+      const graduation = document.getElementById("graduationSection");
+      const special = document.getElementById("specialSection");
+
+      marriage.style.display = type === "زواج" ? "block" : "none";
+      malka.style.display = type === "ملكة" ? "block" : "none";
+      graduation.style.display = type === "حفل تخرج" ? "block" : "none";
+      special.style.display = type === "مناسبة خاصة" ? "block" : "none";
+    }
+
     function handleBooking(e) {
       const eventDate = document.getElementById("eventDate").value;
+      const eventType = document.getElementById("eventType").value;
+      const customEventType = document.getElementById("customEventType").value.trim();
 
       if (!eventDate) {
         alert("يرجى اختيار تاريخ المناسبة من التقويم");
+        return false;
+      }
+
+      if (!customEventType) {
+        alert("يرجى كتابة نوع المناسبة بشكل واضح");
         return false;
       }
 
@@ -553,16 +646,22 @@
         bookings[eventDate] = 0;
       }
 
-      if (bookings[eventDate] === 1) {
+      if (bookings[eventDate] >= 1) {
         alert("هذا اليوم غير متاح ❌ اختر تاريخًا آخر");
         return false;
       }
 
+      if (eventType === "مناسبة خاصة") {
+        document.getElementById("successMessage").style.display = "block";
+        document.getElementById("successMessage").textContent = "تم استلام الطلب مبدئيًا ✅ وسيتم التواصل معك أولًا للتأكد من نوع المناسبة قبل تأكيد الحجز.";
+        alert("تم استلام الطلب مبدئيًا ✅ ولن يتم تأكيد الحجز إلا بعد التواصل معك");
+        return true;
+      }
+
       bookings[eventDate] = 1;
-      // تحديث فوري للتقويم بعد الحجز
-      renderCalendar();
       localStorage.setItem("bookings", JSON.stringify(bookings));
       document.getElementById("successMessage").style.display = "block";
+      document.getElementById("successMessage").textContent = "تم تأكيد الحجز مبدئيًا ✅ وتم إرسال البيانات إلى البريد الإلكتروني.";
       alert("تم تأكيد الحجز ✅ وتم إرسال البيانات إلى البريد الإلكتروني");
 
       setTimeout(() => {
