@@ -1,176 +1,125 @@
-<!DOCTYPE html><html lang="ar" dir="rtl">
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>سبوت لايت نموذج حجزالزواجات</title>
+  <title>سبوت لايت لحجز الزواجات</title>
   <style>
-    * { box-sizing: border-box; }
     body {
-      margin: 0;
       font-family: Arial, sans-serif;
       background: #f7f7f8;
+      margin: 0;
       color: #222;
     }
+
     .container {
-      max-width: 700px;
-      margin: 0 auto;
-      padding: 16px;
+      max-width: 600px;
+      margin: auto;
+      padding: 15px;
     }
+
     .card {
       background: #fff;
-      border-radius: 16px;
-      padding: 18px;
-      box-shadow: 0 6px 20px rgba(0,0,0,.08);
-      margin-bottom: 16px;
+      padding: 15px;
+      border-radius: 12px;
+      margin-bottom: 15px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.06);
     }
-    h1, h2 {
-      margin: 0 0 12px;
+
+    h2 {
+      margin-top: 0;
     }
-    .hero {
-      text-align: center;
-      padding: 28px 18px;
-    }
-    .hero p {
-      margin: 8px 0 0;
-      color: #666;
+
+    p {
       line-height: 1.7;
+      color: #555;
     }
-    .packages {
-      display: grid;
-      gap: 12px;
-    }
-    .package {
-      border: 1px solid #e5e5e5;
-      border-radius: 14px;
-      padding: 14px;
-      cursor: pointer;
-      transition: .2s;
-    }
-    .package:hover {
-      border-color: #999;
-    }
-    .package input {
-      margin-left: 8px;
-    }
-    .price {
-      font-weight: bold;
-      margin-top: 6px;
-    }
+
     label {
       display: block;
+      margin-top: 10px;
       margin-bottom: 6px;
       font-weight: bold;
     }
-    input, select, textarea, button {
+
+    input,
+    textarea,
+    button {
       width: 100%;
-      padding: 14px;
+      padding: 12px;
+      border-radius: 8px;
       border: 1px solid #ddd;
-      border-radius: 12px;
       font-size: 16px;
+      box-sizing: border-box;
     }
+
     textarea {
       min-height: 100px;
       resize: vertical;
     }
-    .grid {
-      display: grid;
-      gap: 12px;
-    }
-    .btn {
+
+    button {
       background: #111;
       color: #fff;
-      border: none;
-      cursor: pointer;
       font-weight: bold;
+      margin-top: 14px;
+      cursor: pointer;
+      border: none;
     }
-    .btn:hover {
-      opacity: .92;
-    }
-    .note {
-      font-size: 14px;
-      color: #666;
-      margin-top: 8px;
-      line-height: 1.6;
-    }
-    @media (min-width: 700px) {
-      .grid-2 {
-        grid-template-columns: 1fr 1fr;
-      }
+
+    button:hover {
+      opacity: 0.95;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <div class="card hero">
-      <h1>سبوت لايت</h1>
-      <p>اختر الباقة المناسبة، حدد التاريخ، أضف ملاحظاتك، ثم أكمل الحجز والدفع.</p>
-    </div><form class="card" onsubmit="goToPayment(event)">
-  <h2>الباقات</h2>
-  <div class="packages">
-    <label class="package">
-      <input type="radio" name="package" value="الباقة الأساسية - 1500 ريال" required>
-      <strong>الباقة الأساسية</strong>
-      <div>تغطية مختصرة + تسليم صور معدلة</div>
-      <div class="price">1500 ريال</div>
-    </label>
 
-    <label class="package">
-      <input type="radio" name="package" value="الباقة المتوسطة - 2500 ريال">
-      <strong>الباقة المتوسطة</strong>
-      <div>تغطية أوسع + فيديو قصير + صور معدلة</div>
-      <div class="price">2500 ريال</div>
-    </label>
+    <div class="card">
+      <h2>سبوت لايت لحجز الزواجات</h2>
+      <p>اختر التاريخ المناسب. الحجز يكون على أساس يوم كامل فقط، والحد الأقصى حجزين في اليوم.</p>
+    </div>
 
-    <label class="package">
-      <input type="radio" name="package" value="الباقة الفاخرة - 4000 ريال">
-      <strong>الباقة الفاخرة</strong>
-      <div>تغطية كاملة + فيديو + مونتاج + صور معدلة</div>
-      <div class="price">4000 ريال</div>
-    </label>
-  </div>
-
-  <div class="grid grid-2" style="margin-top:16px;">
-    <div>
+    <form class="card" onsubmit="handleBooking(event)">
       <label for="name">اسم العميل</label>
-      <input id="name" type="text" placeholder="اكتب الاسم" required>
-    </div>
-    <div>
+      <input id="name" type="text" required />
+
       <label for="phone">رقم الجوال</label>
-      <input id="phone" type="tel" placeholder="05xxxxxxxx" required>
-    </div>
-  </div>
+      <input id="phone" type="text" required />
 
-  <div class="grid grid-2" style="margin-top:12px;">
-    <div>
       <label for="date">تاريخ الزفاف</label>
-      <input id="date" type="date" required>
-    </div>
-    <div>
-      <label for="time">وقت المناسبة</label>
-      <input id="time" type="time" required>
-    </div>
+      <input id="date" type="date" required />
+
+      <label for="notes">ملاحظات</label>
+      <textarea id="notes"></textarea>
+
+      <button type="submit">تأكيد الحجز</button>
+    </form>
+
   </div>
 
-  <div style="margin-top:12px;">
-    <label for="location">الموقع</label>
-    <input id="location" type="text" placeholder="اسم القاعة أو الموقع">
-  </div>
+  <script>
+    let bookings = JSON.parse(localStorage.getItem("bookings") || "{}");
 
-  <div style="margin-top:12px;">
-    <label for="notes">ملاحظات إضافية</label>
-    <textarea id="notes" placeholder="اكتب أي تفاصيل إضافية"></textarea>
-  </div>
+    function handleBooking(e) {
+      e.preventDefault();
 
-  <div style="margin-top:16px;">
-    <button class="btn" type="submit">الانتقال إلى الدفع</button>
-    <div class="note">حالياً هذا نموذج واجهة جاهز. الخطوة التالية ربطه ببوابة دفع وحفظ الحجوزات.</div>
-  </div>
-</form>
+      const date = document.getElementById("date").value;
 
-  </div>  <script>
-    function goToPayment(event) {
-      event.preventDefault();
-      alert('الخطوة التالية: نربط الصفحة مع الدفع الإلكتروني ونحفظ الحجز تلقائياً.');
+      if (!bookings[date]) {
+        bookings[date] = 0;
+      }
+
+      if (bookings[date] >= 2) {
+        alert("هذا اليوم محجوز بالكامل ❌ اختر تاريخ آخر");
+        return;
+      }
+
+      bookings[date] += 1;
+      localStorage.setItem("bookings", JSON.stringify(bookings));
+
+      alert("تم الحجز بنجاح ✅");
     }
-  </script></body>
+  </script>
+</body>
 </html>
