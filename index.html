@@ -7,46 +7,173 @@
   <style>
     * { box-sizing: border-box; }
 
+    :root {
+      --bg: #f5f7fb;
+      --card: rgba(255,255,255,0.92);
+      --text: #1f2937;
+      --muted: #6b7280;
+      --border: #e5e7eb;
+      --shadow: 0 14px 40px rgba(15, 23, 42, 0.08);
+      --green-bg: #e9f9ee;
+      --green-text: #1f7a3e;
+      --red-bg: #ffe7e7;
+      --red-text: #b42318;
+      --gray-bg: #eceff3;
+      --gray-text: #667085;
+      --yellow-bg: #fff7cc;
+      --yellow-border: #f4de74;
+      --yellow-text: #7a5a00;
+      --dark: #111827;
+      --dark-2: #1f2937;
+      --accent: #d4af37;
+    }
+
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: #f6f7fb;
-      color: #222;
+      background:
+        radial-gradient(circle at top right, rgba(212,175,55,.10), transparent 24%),
+        radial-gradient(circle at top left, rgba(17,24,39,.06), transparent 20%),
+        var(--bg);
+      color: var(--text);
     }
 
     .container {
-      max-width: 900px;
+      max-width: 980px;
       margin: 0 auto;
-      padding: 16px;
-    }
-
-    .card {
-      background: #fff;
-      border-radius: 16px;
       padding: 18px;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, #111827, #1f2937 60%, #2d3748);
+      color: #fff;
+      border-radius: 28px;
+      padding: 28px 22px;
+      margin-bottom: 18px;
+      box-shadow: var(--shadow);
+    }
+
+    .hero::before,
+    .hero::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255,255,255,.06);
+      pointer-events: none;
+    }
+
+    .hero::before {
+      width: 220px;
+      height: 220px;
+      top: -70px;
+      left: -70px;
+    }
+
+    .hero::after {
+      width: 180px;
+      height: 180px;
+      bottom: -60px;
+      right: -40px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: 13px;
+      margin-bottom: 14px;
+      backdrop-filter: blur(8px);
+    }
+
+    .hero h1 {
+      margin: 0 0 8px;
+      font-size: 32px;
+      line-height: 1.2;
+    }
+
+    .hero p {
+      margin: 0;
+      color: rgba(255,255,255,.88);
+      line-height: 1.9;
+      max-width: 760px;
+    }
+
+    .notice {
+      margin-top: 16px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 18px;
+      padding: 14px 16px;
+      line-height: 1.9;
+      color: #fff6d6;
+    }
+
+    .form-card {
+      background: var(--card);
+      border: 1px solid rgba(255,255,255,.7);
+      backdrop-filter: blur(10px);
+      border-radius: 24px;
+      padding: 20px;
+      margin-bottom: 18px;
+      box-shadow: var(--shadow);
+    }
+
+    .section-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
       margin-bottom: 16px;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
     }
 
-    h1, h2, h3 {
-      margin-top: 0;
+    .section-head h2 {
+      margin: 0;
+      font-size: 22px;
     }
 
-    p {
-      line-height: 1.8;
-      color: #555;
+    .section-tag {
+      background: #f3f4f6;
+      color: var(--dark-2);
+      border-radius: 999px;
+      padding: 7px 12px;
+      font-size: 13px;
+      font-weight: bold;
+      white-space: nowrap;
     }
 
-    .section-title {
-      margin-bottom: 12px;
-      padding-bottom: 8px;
-      border-bottom: 1px solid #eee;
+    .grid {
+      display: grid;
+      gap: 14px;
+    }
+
+    .grid-2 {
+      grid-template-columns: 1fr;
+    }
+
+    @media (min-width: 760px) {
+      .grid-2 {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
     }
 
     label {
-      display: block;
       font-weight: bold;
-      margin: 12px 0 6px;
+      font-size: 15px;
+      color: var(--dark);
     }
 
     input,
@@ -54,99 +181,103 @@
     select,
     button {
       width: 100%;
-      padding: 13px;
-      border: 1px solid #d9d9d9;
-      border-radius: 12px;
+      padding: 14px 14px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
       font-size: 16px;
       background: #fff;
+      color: var(--text);
+      outline: none;
+      transition: .18s ease;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      border-color: rgba(17,24,39,.28);
+      box-shadow: 0 0 0 4px rgba(17,24,39,.06);
     }
 
     textarea {
-      min-height: 100px;
+      min-height: 110px;
       resize: vertical;
     }
 
-    .grid {
-      display: grid;
-      gap: 12px;
-    }
-
-    @media (min-width: 700px) {
-      .grid-2 {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-
-    .hint {
+    .muted {
+      color: var(--muted);
       font-size: 14px;
-      color: #777;
-      margin-top: 6px;
-      line-height: 1.7;
+      line-height: 1.8;
     }
 
     .box {
-      background: #fafafa;
-      border: 1px solid #eee;
-      border-radius: 14px;
-      padding: 14px;
-      margin-top: 14px;
+      margin-top: 16px;
+      background: #fcfcfd;
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 16px;
+      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.03);
     }
 
-    .btn {
-      background: #111;
-      color: #fff;
-      border: none;
-      font-weight: bold;
-      cursor: pointer;
-      margin-top: 18px;
+    .box h3 {
+      margin: 0 0 12px;
+      font-size: 19px;
+      color: var(--dark);
     }
 
-    .btn:hover {
-      opacity: 0.95;
-    }
-
-    .small-note {
-      background: #fff8e6;
-      border: 1px solid #f1df9a;
-      color: #6b5b17;
-      border-radius: 12px;
-      padding: 12px;
-      line-height: 1.8;
+    .time-note {
+      margin-top: 6px;
       font-size: 14px;
-      margin-top: 10px;
+      color: var(--yellow-text);
+      background: var(--yellow-bg);
+      border: 1px solid var(--yellow-border);
+      border-radius: 14px;
+      padding: 11px 12px;
+      line-height: 1.9;
+      white-space: pre-line;
     }
 
     .readonly-map {
-      background: #f2f4f7;
+      background: #f3f4f6;
     }
 
     .calendar-legend {
       display: flex;
       flex-wrap: wrap;
       gap: 12px;
-      margin-top: 12px;
-      margin-bottom: 10px;
+      margin: 10px 0 14px;
     }
 
     .legend-item {
-      display: flex;
+      display: inline-flex;
       align-items: center;
       gap: 8px;
-      font-size: 14px;
-      color: #444;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-size: 13px;
+      color: var(--dark-2);
     }
 
     .legend-color {
-      width: 18px;
-      height: 18px;
+      width: 16px;
+      height: 16px;
       border-radius: 6px;
       border: 1px solid rgba(0,0,0,.08);
+      flex-shrink: 0;
     }
 
-    .legend-green { background: #dff7e3; }
-    .legend-red { background: #ffdede; }
-    .legend-gray { background: #e5e7eb; }
-    .legend-selected { background: #111; }
+    .legend-green { background: var(--green-bg); }
+    .legend-red { background: var(--red-bg); }
+    .legend-gray { background: var(--gray-bg); }
+    .legend-selected { background: var(--dark); }
+
+    .calendar-shell {
+      background: linear-gradient(180deg, #ffffff, #fafbfc);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 14px;
+    }
 
     .calendar-header {
       display: flex;
@@ -156,19 +287,26 @@
       margin-bottom: 12px;
     }
 
+    .calendar-title {
+      font-size: 20px;
+      font-weight: bold;
+      color: var(--dark);
+    }
+
     .calendar-nav {
       width: auto;
-      padding: 10px 14px;
-      border-radius: 10px;
-      border: 1px solid #ddd;
+      min-width: 100px;
+      padding: 11px 14px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
       background: #fff;
       cursor: pointer;
       font-weight: bold;
+      color: var(--dark);
     }
 
-    .calendar-title {
-      font-weight: bold;
-      font-size: 18px;
+    .calendar-nav:hover {
+      background: #f8fafc;
     }
 
     .weekday-row,
@@ -181,15 +319,15 @@
     .weekday {
       text-align: center;
       font-size: 13px;
-      color: #666;
+      color: var(--muted);
       padding: 8px 0;
       font-weight: bold;
     }
 
-    .calendar-day,
-    .calendar-empty {
-      min-height: 62px;
-      border-radius: 12px;
+    .calendar-empty,
+    .calendar-day {
+      min-height: 70px;
+      border-radius: 16px;
     }
 
     .calendar-empty {
@@ -197,128 +335,178 @@
     }
 
     .calendar-day {
-      border: 1px solid #ddd;
+      border: 1px solid var(--border);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-weight: bold;
-      cursor: pointer;
-      user-select: none;
-      transition: .15s;
-      padding: 6px;
       text-align: center;
+      font-weight: bold;
+      padding: 8px;
+      user-select: none;
+      transition: .16s ease;
     }
 
     .calendar-day.available {
-      background: #dff7e3;
-      color: #176b2f;
+      background: var(--green-bg);
+      color: var(--green-text);
+      cursor: pointer;
     }
 
     .calendar-day.booked {
-      background: #ffdede;
-      color: #a11d1d;
+      background: var(--red-bg);
+      color: var(--red-text);
       cursor: not-allowed;
     }
 
     .calendar-day.blocked {
-      background: #e5e7eb;
-      color: #6b7280;
+      background: var(--gray-bg);
+      color: var(--gray-text);
       cursor: not-allowed;
     }
 
     .calendar-day.selected {
-      background: #111;
+      background: var(--dark);
       color: #fff;
-      border-color: #111;
+      border-color: var(--dark);
     }
 
-    .calendar-day:hover.available {
-      transform: translateY(-1px);
+    .calendar-day.available:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 16px rgba(31, 122, 62, 0.10);
     }
 
     .selected-date-box {
       margin-top: 12px;
-      background: #f5f7fa;
-      border: 1px solid #e5e7eb;
-      border-radius: 12px;
-      padding: 12px;
+      background: #f8fafc;
+      border: 1px dashed #cbd5e1;
+      border-radius: 16px;
+      padding: 14px;
       font-weight: bold;
+      color: var(--dark);
     }
 
-    .time-note {
-      margin-top: 6px;
+    .success-box {
+      display: none;
+      margin-top: 14px;
+      background: #eefaf1;
+      border: 1px solid #b7ebc4;
+      color: #136c2e;
+      border-radius: 16px;
+      padding: 14px;
+      line-height: 1.8;
       font-size: 14px;
-      color: #7a5a00;
-      background: #fff8c4;
-      border: 1px solid #f2df7a;
-      border-radius: 10px;
-      padding: 10px 12px;
-      line-height: 1.9;
-      white-space: pre-line;
+    }
+
+    .submit-wrap {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .btn {
+      border: none;
+      background: linear-gradient(135deg, #111827, #1f2937);
+      color: #fff;
+      font-weight: bold;
+      border-radius: 18px;
+      padding: 16px;
+      cursor: pointer;
+      box-shadow: 0 12px 24px rgba(17, 24, 39, 0.18);
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      opacity: .98;
+    }
+
+    .foot-note {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.8;
+      text-align: center;
+    }
+
+    .fade-section {
+      animation: fadeUp .22s ease;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
   </style>
 </head>
 <body>
   <div class="container">
-
-    <div class="card">
+    <div class="hero">
+      <div class="hero-badge">سبوت لايت • حجز إلكتروني احترافي</div>
       <h1>سبوت لايت لحجز الزواجات</h1>
       <p>
-        يرجى تعبئة بيانات المناسبة كاملة. الحجز يكون على أساس يوم كامل فقط،
-        والحد الأقصى حجز واحد في اليوم.
+        نموذج حجز أنيق وسريع ومناسب للجوال، يساعد العميل على إدخال تفاصيل المناسبة بشكل منظم وواضح.
       </p>
-      <div class="small-note">
+      <div class="notice">
         لايمكن اختيار تاريخ الحجز بتاريخ اليوم او اليوم الذي يليه نرجو منك الترتيب المسبق قبل موعد المناسبة بيومين على الاقل وذلك حتى نتمكن من ترتيب طاقم التصوير ومعدات التصوير
       </div>
     </div>
 
-    <form class="card" action="https://formsubmit.co/kazim.shabib.1410@gmail.com" method="POST" target="hidden_iframe" onsubmit="return handleBooking(event)">
-      <h2 class="section-title">بيانات العميل</h2>
+    <form class="form-card" action="https://formsubmit.co/kazim.shabib.1410@gmail.com" method="POST" target="hidden_iframe" onsubmit="return handleBooking(event)">
+      <div class="section-head">
+        <h2>بيانات العميل والمناسبة</h2>
+        <div class="section-tag">الخطوة الأولى</div>
+      </div>
 
       <div class="grid grid-2">
-        <div>
+        <div class="field">
           <label for="customerName">اسم العميل</label>
-          <input id="customerName" name="اسم العميل" type="text" required />
+          <input id="customerName" name="اسم العميل" type="text" required placeholder="اكتب الاسم الكامل" />
         </div>
-
-        <div>
+        <div class="field">
           <label for="customerPhone">رقم الجوال</label>
-          <input id="customerPhone" name="رقم الجوال" type="tel" required />
+          <input id="customerPhone" name="رقم الجوال" type="tel" required placeholder="05xxxxxxxx" />
         </div>
       </div>
 
-      <label>تاريخ المناسبة</label>
-      <div class="calendar-legend">
-        <div class="legend-item"><span class="legend-color legend-green"></span> متاح</div>
-        <div class="legend-item"><span class="legend-color legend-red"></span> غير متاح</div>
-        <div class="legend-item"><span class="legend-color legend-gray"></span> لايمكن الحجز في هذا التاريخ</div>
-        <div class="legend-item"><span class="legend-color legend-selected"></span> التاريخ المختار</div>
-      </div>
-
-      <div class="box">
-        <div class="calendar-header">
-          <button class="calendar-nav" type="button" onclick="changeMonth(-1)">السابق</button>
-          <div class="calendar-title" id="calendarTitle"></div>
-          <button class="calendar-nav" type="button" onclick="changeMonth(1)">التالي</button>
+      <div class="field" style="margin-top:14px;">
+        <label>تاريخ المناسبة</label>
+        <div class="calendar-legend">
+          <div class="legend-item"><span class="legend-color legend-green"></span> متاح</div>
+          <div class="legend-item"><span class="legend-color legend-red"></span> غير متاح</div>
+          <div class="legend-item"><span class="legend-color legend-gray"></span> لايمكن الحجز في هذا التاريخ</div>
+          <div class="legend-item"><span class="legend-color legend-selected"></span> التاريخ المختار</div>
         </div>
 
-        <div class="weekday-row">
-          <div class="weekday">الأحد</div>
-          <div class="weekday">الاثنين</div>
-          <div class="weekday">الثلاثاء</div>
-          <div class="weekday">الأربعاء</div>
-          <div class="weekday">الخميس</div>
-          <div class="weekday">الجمعة</div>
-          <div class="weekday">السبت</div>
-        </div>
+        <div class="calendar-shell">
+          <div class="calendar-header">
+            <button class="calendar-nav" type="button" onclick="changeMonth(-1)">السابق</button>
+            <div class="calendar-title" id="calendarTitle"></div>
+            <button class="calendar-nav" type="button" onclick="changeMonth(1)">التالي</button>
+          </div>
 
-        <div class="calendar-grid" id="calendarGrid"></div>
-        <input id="eventDate" name="تاريخ المناسبة" type="hidden" required />
-        <div class="selected-date-box" id="selectedDateBox">لم يتم اختيار تاريخ بعد</div>
+          <div class="weekday-row">
+            <div class="weekday">الأحد</div>
+            <div class="weekday">الاثنين</div>
+            <div class="weekday">الثلاثاء</div>
+            <div class="weekday">الأربعاء</div>
+            <div class="weekday">الخميس</div>
+            <div class="weekday">الجمعة</div>
+            <div class="weekday">السبت</div>
+          </div>
+
+          <div class="calendar-grid" id="calendarGrid"></div>
+          <input id="eventDate" name="تاريخ المناسبة" type="hidden" required />
+          <div class="selected-date-box" id="selectedDateBox">لم يتم اختيار تاريخ بعد</div>
+        </div>
       </div>
 
-      <div class="grid grid-2">
-        <div>
+      <div class="grid grid-2" style="margin-top:14px;">
+        <div class="field">
           <label for="eventType">نوع المناسبة</label>
           <select id="eventType" name="نوع المناسبة" required onchange="toggleEventSections()">
             <option value="">اختر المناسبة</option>
@@ -328,182 +516,164 @@
             <option value="مناسبة خاصة">مناسبة خاصة</option>
           </select>
         </div>
+        <div class="field">
+          <label for="customEventType">وصف نوع المناسبة</label>
+          <input id="customEventType" name="وصف نوع المناسبة" type="text" required placeholder="اكتب نوع المناسبة بشكل واضح" />
+        </div>
       </div>
 
-      <label for="customEventType">وصف نوع المناسبة</label>
-      <input id="customEventType" name="وصف نوع المناسبة" type="text" required placeholder="اكتب نوع المناسبة بشكل واضح" />
+      <div class="field" style="margin-top:14px;">
+        <label for="generalNotes">ملاحظات عامة</label>
+        <textarea id="generalNotes" name="ملاحظات عامة" placeholder="اكتب أي تفاصيل إضافية هنا"></textarea>
+      </div>
 
-      <label for="generalNotes">ملاحظات عامة</label>
-      <textarea id="generalNotes" name="ملاحظات عامة" placeholder="اكتب أي تفاصيل إضافية هنا"></textarea>
-
-      <div id="marriageSections">
-      <div class="box">
-        <h3>الحلاق</h3>
-
-        <div class="grid grid-2">
-          <div>
-            <label for="barberTime">وقت الحلاق</label>
-            <input id="barberTime" name="وقت الحلاق" type="time" />
-            <div class="time-note">سوف نكون متواجدين في الموقع قبل الموعد ب١٥ دقيقه
+      <div id="marriageSections" class="fade-section">
+        <div class="box">
+          <h3>الحلاق</h3>
+          <div class="grid grid-2">
+            <div class="field">
+              <label for="barberTime">وقت الحلاق</label>
+              <input id="barberTime" name="وقت الحلاق" type="time" />
+              <div class="time-note">سوف نكون متواجدين في الموقع قبل الموعد ب١٥ دقيقه
 نرجو منك كتابة الموعد الصحيح بدقه والالتزام بالموعد المحدد</div>
+            </div>
+            <div class="field">
+              <label for="barberPlace">مكان الحلاق</label>
+              <input id="barberPlace" name="مكان الحلاق" type="text" placeholder="مثال: صالون أو منزل" />
+            </div>
           </div>
-
-          <div>
-            <label for="barberPlace">مكان الحلاق</label>
-            <input id="barberPlace" name="مكان الحلاق" type="text" placeholder="مثال: صالون أو منزل" />
+          <div class="grid grid-2">
+            <div class="field">
+              <label for="barberCoords">إحداثيات موقع الحلاق</label>
+              <input id="barberCoords" name="إحداثيات موقع الحلاق" class="readonly-map" type="text" placeholder="مثال: 26.4207, 50.0888" />
+            </div>
+            <div class="field">
+              <label for="barberMapLink">رابط موقع الحلاق من Google Maps</label>
+              <input id="barberMapLink" name="رابط موقع الحلاق" type="url" placeholder="الصق رابط الموقع من قوقل ماب" />
+            </div>
           </div>
         </div>
 
-        <label for="barberCoords">إحداثيات موقع الحلاق</label>
-        <input id="barberCoords" name="إحداثيات موقع الحلاق" class="readonly-map" type="text" placeholder="مثال: 26.4207, 50.0888" />
-
-        <label for="barberMapLink">رابط موقع الحلاق من Google Maps</label>
-        <input id="barberMapLink" name="رابط موقع الحلاق" type="url" placeholder="الصق رابط الموقع من قوقل ماب" />
-      </div>
-
-      <div class="box">
-        <h3>السباحة</h3>
-
-        <div class="grid grid-2">
-          <div>
-            <label for="swimTime">وقت السباحة</label>
-            <input id="swimTime" name="وقت السباحة" type="time" />
-            <div class="time-note">سوف نكون متواجدين في الموقع قبل الموعد ب١٥ دقيقه
+        <div class="box">
+          <h3>السباحة</h3>
+          <div class="grid grid-2">
+            <div class="field">
+              <label for="swimTime">وقت السباحة</label>
+              <input id="swimTime" name="وقت السباحة" type="time" />
+              <div class="time-note">سوف نكون متواجدين في الموقع قبل الموعد ب١٥ دقيقه
 نرجو منك كتابة الموعد الصحيح بدقه والالتزام بالموعد المحدد</div>
+            </div>
+            <div class="field">
+              <label for="resortName">اسم الاستراحه</label>
+              <input id="resortName" name="اسم الاستراحة" type="text" placeholder="اكتب اسم الاستراحه" />
+            </div>
           </div>
-
-          <div>
-            <label for="resortName">اسم الاستراحه</label>
-            <input id="resortName" name="اسم الاستراحة" type="text" placeholder="اكتب اسم الاستراحه" />
+          <div class="grid grid-2">
+            <div class="field">
+              <label for="resortLocation">موقع الاستراحه</label>
+              <input id="resortLocation" name="موقع الاستراحة" type="text" placeholder="اسم الموقع أو الحي" />
+            </div>
+            <div class="field">
+              <label for="resortMapLink">رابط موقع الاستراحه من Google Maps</label>
+              <input id="resortMapLink" name="رابط موقع الاستراحة" type="url" placeholder="الصق رابط الموقع من قوقل ماب" />
+            </div>
           </div>
         </div>
 
-        <label for="resortLocation">موقع الاستراحه</label>
-        <input id="resortLocation" name="موقع الاستراحة" type="text" placeholder="اسم الموقع أو الحي" />
-
-        <label for="resortCoords">إحداثيات الاستراحه</label>
-        <input id="resortCoords" name="إحداثيات الاستراحة" class="readonly-map" type="text" placeholder="مثال: 26.3000, 50.2100" />
-
-        <label for="resortMapLink">رابط موقع الاستراحه من Google Maps</label>
-        <input id="resortMapLink" name="رابط موقع الاستراحة" type="url" placeholder="الصق رابط الموقع من قوقل ماب" />
-      </div>
-
-      <div class="box">
-        <h3>زفة المنزل</h3>
-
-        <label for="homeZaffaLocation">موقع زفة المنزل</label>
-        <input id="homeZaffaLocation" name="موقع زفة المنزل" type="text" placeholder="اكتب وصف الموقع" />
-
-        <label for="homeZaffaCoords">إحداثيات موقع زفة المنزل</label>
-        <input id="homeZaffaCoords" name="إحداثيات زفة المنزل" class="readonly-map" type="text" placeholder="مثال: 26.4100, 50.1200" />
-
-        <label for="homeZaffaMapLink">رابط موقع زفة المنزل من Google Maps</label>
-        <input id="homeZaffaMapLink" name="رابط زفة المنزل" type="url" placeholder="الصق رابط الموقع من قوقل ماب" />
-      </div>
-
-      <div class="box">
-        <h3>حفل الزفاف</h3>
-
-        <div class="grid grid-2">
-          <div>
-            <label for="hallName">اسم القاعه</label>
-            <input id="hallName" name="اسم القاعة" type="text" placeholder="اكتب اسم القاعه" />
-          </div>
-
-          <div>
-            <label for="weddingTime">وقت حفل الزفاف</label>
-            <input id="weddingTime" name="وقت حفل الزفاف" type="time" />
-            <div class="time-note">سوف نكون متواجدين في صالة حفل الزفاف قبل الموعد بساعه كامله
-نرجو منك كتابة الموعد الصحيح بدقه والالتزام بالموعد المحدد</div>
+        <div class="box">
+          <h3>زفة المنزل</h3>
+          <div class="grid grid-2">
+            <div class="field">
+              <label for="homeZaffaLocation">موقع زفة المنزل</label>
+              <input id="homeZaffaLocation" name="موقع زفة المنزل" type="text" placeholder="اكتب وصف الموقع" />
+            </div>
+            <div class="field">
+              <label for="homeZaffaMapLink">رابط موقع زفة المنزل من Google Maps</label>
+              <input id="homeZaffaMapLink" name="رابط زفة المنزل" type="url" placeholder="الصق رابط الموقع من قوقل ماب" />
+            </div>
           </div>
         </div>
 
-        <label for="hallLocation">موقع الحفل</label>
-        <input id="hallLocation" name="موقع الحفل" type="text" placeholder="اكتب وصف الموقع أو الحي" />
-
-        <label for="hallCoords">إحداثيات موقع الحفل</label>
-        <input id="hallCoords" name="إحداثيات موقع الحفل" class="readonly-map" type="text" placeholder="مثال: 26.3900, 50.1700" />
-
-        <label for="hallMapLink">رابط موقع الحفل من Google Maps</label>
-        <input id="hallMapLink" name="رابط موقع الحفل" type="url" placeholder="الصق رابط الموقع من قوقل ماب" />
+        <div class="box">
+          <h3>حفل الزفاف</h3>
+          <div class="grid grid-2">
+            <div class="field">
+              <label for="hallName">اسم القاعه</label>
+              <input id="hallName" name="اسم القاعة" type="text" placeholder="اكتب اسم القاعه" />
+            </div>
+            <div class="field">
+              <label for="weddingTime">وقت حفل الزفاف</label>
+              <input id="weddingTime" name="وقت حفل الزفاف" type="time" />
+              <div class="time-note">سوف نكون متواجدين في صالة حفل الزفاف قبل الموعد بساعه كامله
+نرجو منك كتابة الموعد الصحيح بدقه والالتزام بالموعد المحدد</div>
+            </div>
+          </div>
+          <div class="grid grid-2">
+            <div class="field">
+              <label for="hallLocation">موقع الحفل</label>
+              <input id="hallLocation" name="موقع الحفل" type="text" placeholder="اكتب وصف الموقع أو الحي" />
+            </div>
+            <div class="field">
+              <label for="hallMapLink">رابط موقع الحفل من Google Maps</label>
+              <input id="hallMapLink" name="رابط موقع الحفل" type="url" placeholder="الصق رابط الموقع من قوقل ماب" />
+            </div>
+          </div>
+        </div>
       </div>
-      </div>
 
-      <div id="malkaSection" class="box" style="display:none;">
+      <div id="malkaSection" class="box fade-section" style="display:none;">
         <h3>بيانات الملكة</h3>
         <div class="grid grid-2">
-          <div>
-            <label for="malkaTime">وقت الملكة</label>
-            <input id="malkaTime" name="وقت الملكة" type="time" />
-          </div>
-          <div>
+          <div class="field">
             <label for="malkaLocation">موقع الملكة</label>
             <input id="malkaLocation" name="موقع الملكة" type="text" placeholder="اكتب موقع الملكة" />
           </div>
+          <div class="field">
+            <label for="malkaMapLink">رابط موقع الملكة من Google Maps</label>
+            <input id="malkaMapLink" name="رابط موقع الملكة" type="url" placeholder="الصق رابط الموقع من قوقل ماب" />
+          </div>
         </div>
-        <label for="malkaMapLink">رابط موقع الملكة من Google Maps</label>
-        <input id="malkaMapLink" name="رابط موقع الملكة" type="url" placeholder="الصق رابط الموقع من قوقل ماب" />
       </div>
 
-      <div id="graduationSection" class="box" style="display:none;">
+      <div id="graduationSection" class="box fade-section" style="display:none;">
         <h3>بيانات حفل التخرج</h3>
         <div class="grid grid-2">
-          <div>
-            <label for="graduationTime">وقت حفل التخرج</label>
-            <input id="graduationTime" name="وقت حفل التخرج" type="time" />
-          </div>
-          <div>
+          <div class="field">
             <label for="graduationPlace">مكان حفل التخرج</label>
             <input id="graduationPlace" name="مكان حفل التخرج" type="text" placeholder="اكتب مكان الحفل" />
           </div>
+          <div class="field">
+            <label for="graduationMapLink">رابط موقع حفل التخرج من Google Maps</label>
+            <input id="graduationMapLink" name="رابط موقع حفل التخرج" type="url" placeholder="الصق رابط الموقع من قوقل ماب" />
+          </div>
         </div>
-        <label for="graduationMapLink">رابط موقع حفل التخرج من Google Maps</label>
-        <input id="graduationMapLink" name="رابط موقع حفل التخرج" type="url" placeholder="الصق رابط الموقع من قوقل ماب" />
       </div>
 
-      <div id="specialSection" class="box" style="display:none;">
+      <div id="specialSection" class="box fade-section" style="display:none;">
         <h3>بيانات المناسبة الخاصة</h3>
         <div class="grid grid-2">
-          <div>
-            <label for="specialTime">وقت المناسبة الخاصة</label>
-            <input id="specialTime" name="وقت المناسبة الخاصة" type="time" />
-          </div>
-          <div>
+          <div class="field">
             <label for="specialPlace">مكان المناسبة الخاصة</label>
             <input id="specialPlace" name="مكان المناسبة الخاصة" type="text" placeholder="اكتب مكان المناسبة" />
           </div>
-        </div>
-        <label for="specialMapLink">رابط موقع المناسبة الخاصة من Google Maps</label>
-        <input id="specialMapLink" name="رابط موقع المناسبة الخاصة" type="url" placeholder="الصق رابط الموقع من قوقل ماب" />
-        <div class="small-note" style="margin-top:12px;">في حال اختيار مناسبة خاصة سيتم استلام الطلب مبدئيًا فقط، ولن يتم تأكيد الحجز إلا بعد التواصل مع العميل ومراجعة نوع المناسبة.</div>
-      </div>
-
-          <div>
-            <label for="weddingTime">وقت حفل الزفاف</label>
-            <input id="weddingTime" name="وقت حفل الزفاف" type="time" />
-            <div class="time-note">سوف نكون متواجدين في صالة حفل الزفاف قبل الموعد بساعه كامله
-نرجو منك كتابة الموعد الصحيح بدقه والالتزام بالموعد المحدد</div>
+          <div class="field">
+            <label for="specialMapLink">رابط موقع المناسبة الخاصة من Google Maps</label>
+            <input id="specialMapLink" name="رابط موقع المناسبة الخاصة" type="url" placeholder="الصق رابط الموقع من قوقل ماب" />
           </div>
         </div>
-
-        <label for="hallLocation">موقع الحفل</label>
-        <input id="hallLocation" name="موقع الحفل" type="text" placeholder="اكتب وصف الموقع أو الحي" />
-
-        <label for="hallCoords">إحداثيات موقع الحفل</label>
-        <input id="hallCoords" name="إحداثيات موقع الحفل" class="readonly-map" type="text" placeholder="مثال: 26.3900, 50.1700" />
-
-        <label for="hallMapLink">رابط موقع الحفل من Google Maps</label>
-        <input id="hallMapLink" name="رابط موقع الحفل" type="url" placeholder="الصق رابط الموقع من قوقل ماب" />
+        <div class="notice" style="margin-top:12px; background:#fff4e5; color:#8a4b00; border-color:#f6d3a5;">
+          في حال اختيار مناسبة خاصة سيتم استلام الطلب مبدئيًا فقط، ولن يتم تأكيد الحجز إلا بعد التواصل مع العميل ومراجعة نوع المناسبة.
+        </div>
       </div>
 
       <input type="hidden" name="_subject" value="حجز جديد من سبوت لايت" />
       <input type="hidden" name="_template" value="table" />
       <input type="hidden" name="_captcha" value="false" />
 
-      <button class="btn" type="submit">تأكيد الحجز</button>
-      <div id="successMessage" class="small-note" style="display:none; margin-top:12px;">تم تأكيد الحجز مبدئيًا ✅ وتم إرسال البيانات إلى البريد الإلكتروني.</div>
-      <div class="hint">
-        هذه النسخة للتجربة. الحجز الآن يُخزَّن محليًا في المتصفح فقط.
+      <div class="submit-wrap">
+        <button class="btn" type="submit">تأكيد الحجز</button>
+        <div id="successMessage" class="success-box">تم استلام الطلب.</div>
+        <div class="foot-note">هذه النسخة للتجربة. قفل التواريخ حاليًا يعتمد على نفس المتصفح فقط، وليس كل الأجهزة.</div>
       </div>
     </form>
 
@@ -582,7 +752,6 @@
             document.getElementById("eventDate").value = selectedDate;
             selectedDateBox.textContent = `التاريخ المختار: ${selectedDate}`;
             renderCalendar();
-    toggleEventSections();
           });
         }
 
@@ -631,6 +800,7 @@
       const eventDate = document.getElementById("eventDate").value;
       const eventType = document.getElementById("eventType").value;
       const customEventType = document.getElementById("customEventType").value.trim();
+      const successBox = document.getElementById("successMessage");
 
       if (!eventDate) {
         alert("يرجى اختيار تاريخ المناسبة من التقويم");
@@ -642,37 +812,67 @@
         return false;
       }
 
-      if (!bookings[eventDate]) {
-        bookings[eventDate] = 0;
+      if (eventType === "زواج") {
+        const weddingTime = document.getElementById("weddingTime").value;
+        const hallLocation = document.getElementById("hallLocation").value.trim();
+
+        if (!weddingTime || !hallLocation) {
+          alert("يرجى تعبئة وقت وموقع حفل الزفاف");
+          return false;
+        }
       }
 
-      if (bookings[eventDate] >= 1) {
-        alert("هذا اليوم غير متاح ❌ اختر تاريخًا آخر");
-        return false;
+      if (eventType === "ملكة") {
+        const malkaLocation = document.getElementById("malkaLocation").value.trim();
+        if (!malkaLocation) {
+          alert("يرجى إدخال موقع الملكة");
+          return false;
+        }
+      }
+
+      if (eventType === "حفل تخرج") {
+        const graduationPlace = document.getElementById("graduationPlace").value.trim();
+        if (!graduationPlace) {
+          alert("يرجى إدخال مكان حفل التخرج");
+          return false;
+        }
       }
 
       if (eventType === "مناسبة خاصة") {
-        document.getElementById("successMessage").style.display = "block";
-        document.getElementById("successMessage").textContent = "تم استلام الطلب مبدئيًا ✅ وسيتم التواصل معك أولًا للتأكد من نوع المناسبة قبل تأكيد الحجز.";
+        const specialPlace = document.getElementById("specialPlace").value.trim();
+        if (!specialPlace) {
+          alert("يرجى إدخال مكان المناسبة الخاصة");
+          return false;
+        }
+
+        successBox.style.display = "block";
+        successBox.textContent = "تم استلام الطلب مبدئيًا ✅ وسيتم التواصل معك أولًا للتأكد من نوع المناسبة قبل تأكيد الحجز.";
         alert("تم استلام الطلب مبدئيًا ✅ ولن يتم تأكيد الحجز إلا بعد التواصل معك");
         return true;
       }
 
+      if (!bookings[eventDate]) {
+        bookings[eventDate] = 0;
+      }
+
+      if (bookings[eventDate] === 1) {
+        alert("هذا اليوم غير متاح ❌ اختر تاريخًا آخر");
+        renderCalendar();
+        return false;
+      }
+
       bookings[eventDate] = 1;
       localStorage.setItem("bookings", JSON.stringify(bookings));
-      document.getElementById("successMessage").style.display = "block";
-      document.getElementById("successMessage").textContent = "تم تأكيد الحجز مبدئيًا ✅ وتم إرسال البيانات إلى البريد الإلكتروني.";
+      renderCalendar();
+
+      successBox.style.display = "block";
+      successBox.textContent = "تم تأكيد الحجز مبدئيًا ✅ وتم إرسال البيانات إلى البريد الإلكتروني.";
       alert("تم تأكيد الحجز ✅ وتم إرسال البيانات إلى البريد الإلكتروني");
-
-      setTimeout(() => {
-        selectedDate = "";
-        renderCalendar();
-      }, 300);
-
       return true;
     }
 
     renderCalendar();
+    toggleEventSections();
   </script>
 </body>
 </html>
