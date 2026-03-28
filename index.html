@@ -145,6 +145,7 @@
 
     .legend-green { background: #dff7e3; }
     .legend-red { background: #ffdede; }
+    .legend-gray { background: #e5e7eb; }
     .legend-selected { background: #111; }
 
     .calendar-header {
@@ -219,6 +220,12 @@
       cursor: not-allowed;
     }
 
+    .calendar-day.blocked {
+      background: #e5e7eb;
+      color: #6b7280;
+      cursor: not-allowed;
+    }
+
     .calendar-day.selected {
       background: #111;
       color: #fff;
@@ -241,8 +248,13 @@
     .time-note {
       margin-top: 6px;
       font-size: 14px;
-      color: #666;
-      line-height: 1.7;
+      color: #7a5a00;
+      background: #fff8c4;
+      border: 1px solid #f2df7a;
+      border-radius: 10px;
+      padding: 10px 12px;
+      line-height: 1.9;
+      white-space: pre-line;
     }
   </style>
 </head>
@@ -253,26 +265,25 @@
       <h1>سبوت لايت لحجز الزواجات</h1>
       <p>
         يرجى تعبئة بيانات المناسبة كاملة. الحجز يكون على أساس يوم كامل فقط،
-        والنسخة الحالية للتجربة، والحد الأقصى حجز واحد في اليوم.
+        والحد الأقصى حجز واحد في اليوم.
       </p>
       <div class="small-note">
-        ملاحظة: الخريطة هنا حاليًا عبارة عن خانة لإدخال الإحداثيات ورابط الموقع من Google Maps.
-        لاحقًا نقدر نضيف خريطة تفاعلية فعلية.
+        لا يمكن الحجز لتاريخ اليوم أو اليوم التالي. الحجز يبدأ بعد مهلة يومين لترتيب طاقم الحفل.
       </div>
     </div>
 
-    <form class="card" onsubmit="handleBooking(event)">
+    <form class="card" action="https://formsubmit.co/kazim.shabib.1410@gmail.com" method="POST" target="hidden_iframe" onsubmit="return handleBooking(event)">
       <h2 class="section-title">بيانات العميل</h2>
 
       <div class="grid grid-2">
         <div>
           <label for="customerName">اسم العميل</label>
-          <input id="customerName" type="text" required />
+          <input id="customerName" name="اسم العميل" type="text" required />
         </div>
 
         <div>
           <label for="customerPhone">رقم الجوال</label>
-          <input id="customerPhone" type="tel" required />
+          <input id="customerPhone" name="رقم الجوال" type="tel" required />
         </div>
       </div>
 
@@ -280,6 +291,7 @@
       <div class="calendar-legend">
         <div class="legend-item"><span class="legend-color legend-green"></span> متاح</div>
         <div class="legend-item"><span class="legend-color legend-red"></span> غير متاح</div>
+        <div class="legend-item"><span class="legend-color legend-gray"></span> لايمكن الحجز في هذا التاريخ</div>
         <div class="legend-item"><span class="legend-color legend-selected"></span> التاريخ المختار</div>
       </div>
 
@@ -301,14 +313,14 @@
         </div>
 
         <div class="calendar-grid" id="calendarGrid"></div>
-        <input id="eventDate" type="hidden" required />
+        <input id="eventDate" name="تاريخ المناسبة" type="hidden" required />
         <div class="selected-date-box" id="selectedDateBox">لم يتم اختيار تاريخ بعد</div>
       </div>
 
       <div class="grid grid-2">
         <div>
           <label for="eventType">نوع المناسبة</label>
-          <select id="eventType" required>
+          <select id="eventType" name="نوع المناسبة" required>
             <option value="">اختر المناسبة</option>
             <option>زواج</option>
             <option>ملكة</option>
@@ -319,7 +331,7 @@
       </div>
 
       <label for="generalNotes">ملاحظات عامة</label>
-      <textarea id="generalNotes" placeholder="اكتب أي تفاصيل إضافية هنا"></textarea>
+      <textarea id="generalNotes" name="ملاحظات عامة" placeholder="اكتب أي تفاصيل إضافية هنا"></textarea>
 
       <div class="box">
         <h3>الحلاق</h3>
@@ -327,21 +339,22 @@
         <div class="grid grid-2">
           <div>
             <label for="barberTime">وقت الحلاق</label>
-            <input id="barberTime" type="time" />
-            <div class="time-note">سوف نكون متواجدين في الموقع قبل الموعد ب١٥ دقيقه\nنرجو منك كتابة الموعد الصحيح بدقه والالتزام بالموعد المحدد</div>
+            <input id="barberTime" name="وقت الحلاق" type="time" />
+            <div class="time-note">سوف نكون متواجدين في الموقع قبل الموعد ب١٥ دقيقه
+نرجو منك كتابة الموعد الصحيح بدقه والالتزام بالموعد المحدد</div>
           </div>
 
           <div>
             <label for="barberPlace">مكان الحلاق</label>
-            <input id="barberPlace" type="text" placeholder="مثال: صالون أو منزل" />
+            <input id="barberPlace" name="مكان الحلاق" type="text" placeholder="مثال: صالون أو منزل" />
           </div>
         </div>
 
         <label for="barberCoords">إحداثيات موقع الحلاق</label>
-        <input id="barberCoords" class="readonly-map" type="text" placeholder="مثال: 26.4207, 50.0888" />
+        <input id="barberCoords" name="إحداثيات موقع الحلاق" class="readonly-map" type="text" placeholder="مثال: 26.4207, 50.0888" />
 
         <label for="barberMapLink">رابط موقع الحلاق من Google Maps</label>
-        <input id="barberMapLink" type="url" placeholder="الصق رابط الموقع من قوقل ماب" />
+        <input id="barberMapLink" name="رابط موقع الحلاق" type="url" placeholder="الصق رابط الموقع من قوقل ماب" />
       </div>
 
       <div class="box">
@@ -350,37 +363,38 @@
         <div class="grid grid-2">
           <div>
             <label for="swimTime">وقت السباحة</label>
-            <input id="swimTime" type="time" />
-            <div class="time-note">سوف نكون متواجدين في الموقع قبل الموعد ب١٥ دقيقه\nنرجو منك كتابة الموعد الصحيح بدقه والالتزام بالموعد المحدد</div>
+            <input id="swimTime" name="وقت السباحة" type="time" />
+            <div class="time-note">سوف نكون متواجدين في الموقع قبل الموعد ب١٥ دقيقه
+نرجو منك كتابة الموعد الصحيح بدقه والالتزام بالموعد المحدد</div>
           </div>
 
           <div>
             <label for="resortName">اسم الاستراحه</label>
-            <input id="resortName" type="text" placeholder="اكتب اسم الاستراحه" />
+            <input id="resortName" name="اسم الاستراحة" type="text" placeholder="اكتب اسم الاستراحه" />
           </div>
         </div>
 
         <label for="resortLocation">موقع الاستراحه</label>
-        <input id="resortLocation" type="text" placeholder="اسم الموقع أو الحي" />
+        <input id="resortLocation" name="موقع الاستراحة" type="text" placeholder="اسم الموقع أو الحي" />
 
         <label for="resortCoords">إحداثيات الاستراحه</label>
-        <input id="resortCoords" class="readonly-map" type="text" placeholder="مثال: 26.3000, 50.2100" />
+        <input id="resortCoords" name="إحداثيات الاستراحة" class="readonly-map" type="text" placeholder="مثال: 26.3000, 50.2100" />
 
         <label for="resortMapLink">رابط موقع الاستراحه من Google Maps</label>
-        <input id="resortMapLink" type="url" placeholder="الصق رابط الموقع من قوقل ماب" />
+        <input id="resortMapLink" name="رابط موقع الاستراحة" type="url" placeholder="الصق رابط الموقع من قوقل ماب" />
       </div>
 
       <div class="box">
         <h3>زفة المنزل</h3>
 
         <label for="homeZaffaLocation">موقع زفة المنزل</label>
-        <input id="homeZaffaLocation" type="text" placeholder="اكتب وصف الموقع" />
+        <input id="homeZaffaLocation" name="موقع زفة المنزل" type="text" placeholder="اكتب وصف الموقع" />
 
         <label for="homeZaffaCoords">إحداثيات موقع زفة المنزل</label>
-        <input id="homeZaffaCoords" class="readonly-map" type="text" placeholder="مثال: 26.4100, 50.1200" />
+        <input id="homeZaffaCoords" name="إحداثيات زفة المنزل" class="readonly-map" type="text" placeholder="مثال: 26.4100, 50.1200" />
 
         <label for="homeZaffaMapLink">رابط موقع زفة المنزل من Google Maps</label>
-        <input id="homeZaffaMapLink" type="url" placeholder="الصق رابط الموقع من قوقل ماب" />
+        <input id="homeZaffaMapLink" name="رابط زفة المنزل" type="url" placeholder="الصق رابط الموقع من قوقل ماب" />
       </div>
 
       <div class="box">
@@ -389,41 +403,53 @@
         <div class="grid grid-2">
           <div>
             <label for="hallName">اسم القاعه</label>
-            <input id="hallName" type="text" placeholder="اكتب اسم القاعه" />
+            <input id="hallName" name="اسم القاعة" type="text" placeholder="اكتب اسم القاعه" />
           </div>
 
           <div>
             <label for="weddingTime">وقت حفل الزفاف</label>
-            <input id="weddingTime" type="time" />
-            <div class="time-note">سوف نكون متواجدين في صالة حفل الزفاف قبل الموعد بساعه كامله\nنرجو منك كتابة الموعد الصحيح بدقه والالتزام بالموعد المحدد</div>
+            <input id="weddingTime" name="وقت حفل الزفاف" type="time" />
+            <div class="time-note">سوف نكون متواجدين في صالة حفل الزفاف قبل الموعد بساعه كامله
+نرجو منك كتابة الموعد الصحيح بدقه والالتزام بالموعد المحدد</div>
           </div>
         </div>
 
         <label for="hallLocation">موقع الحفل</label>
-        <input id="hallLocation" type="text" placeholder="اكتب وصف الموقع أو الحي" />
+        <input id="hallLocation" name="موقع الحفل" type="text" placeholder="اكتب وصف الموقع أو الحي" />
 
         <label for="hallCoords">إحداثيات موقع الحفل</label>
-        <input id="hallCoords" class="readonly-map" type="text" placeholder="مثال: 26.3900, 50.1700" />
+        <input id="hallCoords" name="إحداثيات موقع الحفل" class="readonly-map" type="text" placeholder="مثال: 26.3900, 50.1700" />
 
         <label for="hallMapLink">رابط موقع الحفل من Google Maps</label>
-        <input id="hallMapLink" type="url" placeholder="الصق رابط الموقع من قوقل ماب" />
+        <input id="hallMapLink" name="رابط موقع الحفل" type="url" placeholder="الصق رابط الموقع من قوقل ماب" />
       </div>
 
+      <input type="hidden" name="_subject" value="حجز جديد من سبوت لايت" />
+      <input type="hidden" name="_template" value="table" />
+      <input type="hidden" name="_captcha" value="false" />
+
       <button class="btn" type="submit">تأكيد الحجز</button>
+      <div id="successMessage" class="small-note" style="display:none; margin-top:12px;">تم تأكيد الحجز مبدئيًا ✅ وتم إرسال البيانات إلى البريد الإلكتروني.</div>
       <div class="hint">
         هذه النسخة للتجربة. الحجز الآن يُخزَّن محليًا في المتصفح فقط.
       </div>
     </form>
+
+    <iframe name="hidden_iframe" style="display:none;"></iframe>
   </div>
 
   <script>
     let bookings = JSON.parse(localStorage.getItem("bookings") || "{}");
+
     const monthNames = [
       "يناير", "فبراير", "مارس", "أبريل", "مايو", "يونيو",
       "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"
     ];
 
     const today = new Date();
+    const currentDateOnly = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+    const minBookableDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 2);
+
     let currentMonth = today.getMonth();
     let currentYear = today.getFullYear();
     let selectedDate = "";
@@ -438,8 +464,12 @@
 
     function isPastDate(year, month, day) {
       const checkDate = new Date(year, month, day);
-      const cleanToday = new Date(today.getFullYear(), today.getMonth(), today.getDate());
-      return checkDate < cleanToday;
+      return checkDate < currentDateOnly;
+    }
+
+    function isBlockedDate(year, month, day) {
+      const checkDate = new Date(year, month, day);
+      return checkDate < minBookableDate;
     }
 
     function renderCalendar() {
@@ -467,8 +497,11 @@
 
         const booked = bookings[dateKey] >= 1;
         const past = isPastDate(currentYear, currentMonth, day);
+        const blocked = isBlockedDate(currentYear, currentMonth, day);
 
-        if (booked || past) {
+        if (blocked) {
+          dayCell.classList.add("blocked");
+        } else if (booked || past) {
           dayCell.classList.add("booked");
         } else {
           dayCell.classList.add("available");
@@ -509,13 +542,11 @@
     }
 
     function handleBooking(e) {
-      e.preventDefault();
-
       const eventDate = document.getElementById("eventDate").value;
 
       if (!eventDate) {
         alert("يرجى اختيار تاريخ المناسبة من التقويم");
-        return;
+        return false;
       }
 
       if (!bookings[eventDate]) {
@@ -524,17 +555,20 @@
 
       if (bookings[eventDate] >= 1) {
         alert("هذا اليوم غير متاح ❌ اختر تاريخًا آخر");
-        return;
+        return false;
       }
 
       bookings[eventDate] = 1;
       localStorage.setItem("bookings", JSON.stringify(bookings));
+      document.getElementById("successMessage").style.display = "block";
+      alert("تم تأكيد الحجز ✅ وتم إرسال البيانات إلى البريد الإلكتروني");
 
-      alert("تم تسجيل الحجز بنجاح ✅");
-      selectedDate = "";
-      document.getElementById("eventDate").value = "";
-      e.target.reset();
-      renderCalendar();
+      setTimeout(() => {
+        selectedDate = "";
+        renderCalendar();
+      }, 300);
+
+      return true;
     }
 
     renderCalendar();
