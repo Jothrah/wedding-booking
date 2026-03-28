@@ -268,7 +268,7 @@
         والحد الأقصى حجز واحد في اليوم.
       </p>
       <div class="small-note">
-        لا يمكن الحجز لتاريخ اليوم أو اليوم التالي. الحجز يبدأ بعد مهلة يومين لترتيب طاقم الحفل.
+        لايمكن اختيار تاريخ الحجز بتاريخ اليوم او اليوم الذي يليه نرجو منك الترتيب المسبق قبل موعد المناسبة بيومين على الاقل وذلك حتى نتمكن من ترتيب طاقم التصوير ومعدات التصوير
       </div>
     </div>
 
@@ -495,7 +495,7 @@
         dayCell.textContent = day;
         dayCell.className = "calendar-day";
 
-        const booked = bookings[dateKey] >= 1;
+        const booked = bookings[dateKey] === 1;
         const past = isPastDate(currentYear, currentMonth, day);
         const blocked = isBlockedDate(currentYear, currentMonth, day);
 
@@ -553,12 +553,14 @@
         bookings[eventDate] = 0;
       }
 
-      if (bookings[eventDate] >= 1) {
+      if (bookings[eventDate] === 1) {
         alert("هذا اليوم غير متاح ❌ اختر تاريخًا آخر");
         return false;
       }
 
       bookings[eventDate] = 1;
+      // تحديث فوري للتقويم بعد الحجز
+      renderCalendar();
       localStorage.setItem("bookings", JSON.stringify(bookings));
       document.getElementById("successMessage").style.display = "block";
       alert("تم تأكيد الحجز ✅ وتم إرسال البيانات إلى البريد الإلكتروني");
