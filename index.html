@@ -3,43 +3,44 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>سبوت لايت لحجز الزواجات</title>
+  <title>مجموعة سبوت لايت لتصوير الزواجات والحفلات</title>
   <style>
     * { box-sizing: border-box; }
 
     :root {
-      --bg: #f5f7fb;
-      --card: rgba(255,255,255,0.92);
-      --text: #1f2937;
+      --bg: #f7f7f8;
+      --card: rgba(255,255,255,.96);
+      --text: #151515;
       --muted: #6b7280;
-      --border: #e5e7eb;
-      --shadow: 0 14px 40px rgba(15, 23, 42, 0.08);
-      --green-bg: #e9f9ee;
-      --green-text: #1f7a3e;
-      --red-bg: #ffe7e7;
-      --red-text: #b42318;
-      --gray-bg: #eceff3;
-      --gray-text: #667085;
-      --yellow-bg: #fff7cc;
-      --yellow-border: #f4de74;
-      --yellow-text: #7a5a00;
-      --dark: #111827;
-      --dark-2: #1f2937;
-      --accent: #d4af37;
+      --line: #e5e7eb;
+      --dark: #101828;
+      --dark-2: #1d2939;
+      --gold: #c9a227;
+      --gold-soft: #fff7dc;
+      --gold-line: #edd98d;
+      --accent: #111827;
+      --success: #0f766e;
+      --danger: #b42318;
+      --danger-bg: #fff1f2;
+      --success-bg: #ecfdf3;
+      --shadow: 0 18px 45px rgba(15, 23, 42, .10);
+      --radius-xl: 28px;
+      --radius-lg: 22px;
+      --radius-md: 16px;
     }
 
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background:
-        radial-gradient(circle at top right, rgba(212,175,55,.10), transparent 24%),
-        radial-gradient(circle at top left, rgba(17,24,39,.06), transparent 20%),
-        var(--bg);
+      font-family: "Tahoma", Arial, sans-serif;
       color: var(--text);
+      background:
+        radial-gradient(circle at top right, rgba(201,162,39,.12), transparent 20%),
+        radial-gradient(circle at top left, rgba(17,24,39,.06), transparent 18%),
+        linear-gradient(180deg, #fafafa 0%, #f4f5f7 100%);
     }
 
     .container {
-      max-width: 980px;
+      max-width: 1150px;
       margin: 0 auto;
       padding: 18px;
     }
@@ -47,12 +48,12 @@
     .hero {
       position: relative;
       overflow: hidden;
-      background: linear-gradient(135deg, #111827, #1f2937 60%, #2d3748);
+      background: linear-gradient(135deg, #0f172a, #1f2937 55%, #111827);
       color: #fff;
-      border-radius: 28px;
-      padding: 28px 22px;
-      margin-bottom: 18px;
+      border-radius: 34px;
+      padding: 34px 26px;
       box-shadow: var(--shadow);
+      margin-bottom: 20px;
     }
 
     .hero::before,
@@ -60,32 +61,21 @@
       content: "";
       position: absolute;
       border-radius: 50%;
-      background: rgba(255,255,255,.06);
+      background: rgba(255,255,255,.05);
       pointer-events: none;
     }
 
-    .hero::before {
-      width: 220px;
-      height: 220px;
-      top: -70px;
-      left: -70px;
-    }
-
-    .hero::after {
-      width: 180px;
-      height: 180px;
-      bottom: -60px;
-      right: -40px;
-    }
+    .hero::before { width: 240px; height: 240px; top: -100px; left: -80px; }
+    .hero::after { width: 190px; height: 190px; bottom: -70px; right: -40px; }
 
     .hero-badge {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: rgba(255,255,255,.1);
-      border: 1px solid rgba(255,255,255,.12);
-      border-radius: 999px;
       padding: 8px 14px;
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: 999px;
+      background: rgba(255,255,255,.09);
       font-size: 13px;
       margin-bottom: 14px;
       backdrop-filter: blur(8px);
@@ -93,189 +83,228 @@
 
     .hero h1 {
       margin: 0 0 8px;
-      font-size: 32px;
-      line-height: 1.2;
+      font-size: 34px;
+      line-height: 1.25;
     }
 
     .hero p {
       margin: 0;
       color: rgba(255,255,255,.88);
-      line-height: 1.9;
-      max-width: 760px;
+      line-height: 1.95;
+      max-width: 900px;
     }
 
-    .notice {
+    .hero-brand {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      margin-bottom: 18px;
+      text-align: center;
+      flex-wrap: wrap;
+    }
+
+    .hero-logo-wrap {
+      width: 86px;
+      height: 86px;
+      border-radius: 24px;
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.16);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 10px 28px rgba(0,0,0,.12);
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .hero-logo-wrap img {
+      width: 68px;
+      height: 68px;
+      object-fit: contain;
+      display: block;
+    }
+
+    .hero-title-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .hero-kicker {
+      color: #f8e7a7;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: .2px;
+    }
+
+    .hero-contact {
       margin-top: 16px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .hero-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border-radius: 999px;
+      padding: 10px 14px;
       background: rgba(255,255,255,.08);
       border: 1px solid rgba(255,255,255,.12);
-      border-radius: 18px;
-      padding: 14px 16px;
-      line-height: 1.9;
-      color: #fff6d6;
+      color: #fff8d8;
+      font-size: 14px;
     }
 
-    .form-card {
+    .card {
       background: var(--card);
-      border: 1px solid rgba(255,255,255,.7);
-      backdrop-filter: blur(10px);
-      border-radius: 24px;
-      padding: 20px;
-      margin-bottom: 18px;
+      border: 1px solid rgba(255,255,255,.8);
+      border-radius: var(--radius-xl);
       box-shadow: var(--shadow);
+      padding: 22px;
+      margin-bottom: 18px;
+      backdrop-filter: blur(10px);
     }
 
     .section-head {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 10px;
+      gap: 12px;
       margin-bottom: 16px;
       padding-bottom: 12px;
-      border-bottom: 1px solid var(--border);
+      border-bottom: 1px solid var(--line);
     }
 
-    .section-head h2 {
-      margin: 0;
-      font-size: 22px;
-    }
+    .section-head h2 { margin: 0; font-size: 24px; color: var(--dark); }
 
-    .section-tag {
+    .section-badge {
       background: #f3f4f6;
       color: var(--dark-2);
+      padding: 8px 12px;
       border-radius: 999px;
-      padding: 7px 12px;
       font-size: 13px;
-      font-weight: bold;
+      font-weight: 700;
       white-space: nowrap;
     }
 
-    .grid {
-      display: grid;
-      gap: 14px;
+    .grid { display: grid; gap: 14px; }
+    .grid-2 { grid-template-columns: 1fr; }
+    .grid-3 { grid-template-columns: 1fr; }
+
+    @media (min-width: 760px) {
+      .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     }
 
-    .grid-2 {
+    .field { display: flex; flex-direction: column; gap: 8px; }
+
+    .map-input-row {
+      display: grid;
       grid-template-columns: 1fr;
+      gap: 10px;
     }
 
     @media (min-width: 760px) {
-      .grid-2 {
-        grid-template-columns: 1fr 1fr;
+      .map-input-row {
+        grid-template-columns: minmax(0, 1fr) 220px;
       }
     }
 
-    .field {
-      display: flex;
-      flex-direction: column;
-      gap: 7px;
+    .map-link-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 14px;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--dark-2);
+      background: #fff;
+      transition: .18s ease;
+      min-height: 54px;
+    }
+
+    .map-link-btn:hover {
+      border-color: var(--gold);
+      background: #fffdf6;
     }
 
     label {
-      font-weight: bold;
       font-size: 15px;
+      font-weight: 700;
       color: var(--dark);
     }
 
-    input,
-    textarea,
-    select,
-    button {
+    input, select, textarea, button {
       width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 18px;
       padding: 14px 14px;
-      border-radius: 16px;
-      border: 1px solid var(--border);
-      font-size: 16px;
-      background: #fff;
+      font-size: 15px;
+      font-family: inherit;
       color: var(--text);
-      outline: none;
+      background: #fff;
       transition: .18s ease;
+      outline: none;
     }
 
-    input:focus,
-    textarea:focus,
-    select:focus {
+    input:focus, select:focus, textarea:focus {
       border-color: rgba(17,24,39,.28);
       box-shadow: 0 0 0 4px rgba(17,24,39,.06);
     }
 
-    textarea {
-      min-height: 110px;
-      resize: vertical;
-    }
+    textarea { min-height: 110px; resize: vertical; line-height: 1.8; }
 
-    .muted {
-      color: var(--muted);
-      font-size: 14px;
-      line-height: 1.8;
-    }
-
-    .box {
-      margin-top: 16px;
-      background: #fcfcfd;
-      border: 1px solid var(--border);
-      border-radius: 22px;
-      padding: 16px;
-      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.03);
-    }
-
-    .box h3 {
-      margin: 0 0 12px;
-      font-size: 19px;
-      color: var(--dark);
-    }
-
-    .time-note {
-      margin-top: 6px;
-      font-size: 14px;
-      color: var(--yellow-text);
-      background: var(--yellow-bg);
-      border: 1px solid var(--yellow-border);
-      border-radius: 14px;
-      padding: 11px 12px;
+    .alert, .info-strip, .success-box, .warning-box {
+      border-radius: 18px;
+      padding: 14px 16px;
       line-height: 1.9;
-      white-space: pre-line;
+      font-size: 14px;
     }
 
-    .readonly-map {
-      background: #f3f4f6;
+    .alert {
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.12);
+      color: #fff6d4;
+      margin-top: 16px;
     }
 
-    .calendar-legend {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin: 10px 0 14px;
+    .info-strip {
+      background: var(--gold-soft);
+      border: 1px solid var(--gold-line);
+      color: #6d5300;
+      margin-top: 12px;
     }
 
-    .legend-item {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: #fff;
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      padding: 8px 12px;
-      font-size: 13px;
-      color: var(--dark-2);
+    .warning-box {
+      background: #fff7ed;
+      border: 1px solid #fed7aa;
+      color: #9a3412;
+      margin-top: 16px;
     }
 
-    .legend-color {
-      width: 16px;
-      height: 16px;
-      border-radius: 6px;
-      border: 1px solid rgba(0,0,0,.08);
-      flex-shrink: 0;
+    .success-box {
+      display: none;
+      background: var(--success-bg);
+      border: 1px solid #a7f3d0;
+      color: #065f46;
+      margin-top: 16px;
     }
-
-    .legend-green { background: var(--green-bg); }
-    .legend-red { background: var(--red-bg); }
-    .legend-gray { background: var(--gray-bg); }
-    .legend-selected { background: var(--dark); }
 
     .calendar-shell {
-      background: linear-gradient(180deg, #ffffff, #fafbfc);
-      border: 1px solid var(--border);
-      border-radius: 22px;
+      background: linear-gradient(180deg, #fff 0%, #fafbfc 100%);
+      border: 1px solid var(--line);
+      border-radius: 24px;
       padding: 14px;
     }
 
@@ -289,28 +318,24 @@
 
     .calendar-title {
       font-size: 20px;
-      font-weight: bold;
+      font-weight: 800;
       color: var(--dark);
+      text-align: center;
+      flex: 1;
     }
 
     .calendar-nav {
       width: auto;
-      min-width: 100px;
-      padding: 11px 14px;
+      min-width: 108px;
+      padding: 12px 14px;
       border-radius: 14px;
-      border: 1px solid var(--border);
       background: #fff;
+      border: 1px solid var(--line);
+      font-weight: 700;
       cursor: pointer;
-      font-weight: bold;
-      color: var(--dark);
     }
 
-    .calendar-nav:hover {
-      background: #f8fafc;
-    }
-
-    .weekday-row,
-    .calendar-grid {
+    .weekday-row, .calendar-grid {
       display: grid;
       grid-template-columns: repeat(7, 1fr);
       gap: 8px;
@@ -318,87 +343,210 @@
 
     .weekday {
       text-align: center;
+      padding: 8px 0;
       font-size: 13px;
       color: var(--muted);
-      padding: 8px 0;
-      font-weight: bold;
+      font-weight: 700;
     }
 
-    .calendar-empty,
-    .calendar-day {
-      min-height: 70px;
-      border-radius: 16px;
-    }
-
-    .calendar-empty {
-      background: transparent;
-    }
+    .calendar-empty, .calendar-day { min-height: 76px; border-radius: 16px; }
+    .calendar-empty { background: transparent; }
 
     .calendar-day {
-      border: 1px solid var(--border);
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
+      gap: 4px;
       text-align: center;
-      font-weight: bold;
-      padding: 8px;
+      border: 1px solid var(--line);
+      font-weight: 700;
       user-select: none;
       transition: .16s ease;
+      padding: 8px;
     }
 
-    .calendar-day.available {
-      background: var(--green-bg);
-      color: var(--green-text);
-      cursor: pointer;
-    }
-
-    .calendar-day.booked {
-      background: var(--red-bg);
-      color: var(--red-text);
-      cursor: not-allowed;
-    }
-
-    .calendar-day.blocked {
-      background: var(--gray-bg);
-      color: var(--gray-text);
-      cursor: not-allowed;
-    }
-
-    .calendar-day.selected {
-      background: var(--dark);
-      color: #fff;
-      border-color: var(--dark);
-    }
-
-    .calendar-day.available:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 16px rgba(31, 122, 62, 0.10);
-    }
+    .calendar-day small { font-weight: 400; font-size: 11px; opacity: .85; }
+    .calendar-day.available { background: #eefcf3; color: #157347; cursor: pointer; }
+    .calendar-day.booked { background: #fff1f2; color: #b42318; cursor: not-allowed; }
+    .calendar-day.blocked { background: #f3f4f6; color: #98a2b3; cursor: not-allowed; }
+    .calendar-day.selected { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .calendar-day.available:hover { transform: translateY(-2px); box-shadow: 0 10px 18px rgba(21,115,71,.12); }
 
     .selected-date-box {
       margin-top: 12px;
       background: #f8fafc;
       border: 1px dashed #cbd5e1;
-      border-radius: 16px;
+      border-radius: 18px;
       padding: 14px;
-      font-weight: bold;
-      color: var(--dark);
+      font-weight: 700;
+      line-height: 1.9;
     }
 
-    .success-box {
-      display: none;
-      margin-top: 14px;
-      background: #eefaf1;
-      border: 1px solid #b7ebc4;
-      color: #136c2e;
+    .date-warning-inline {
+      margin-top: 10px;
+      color: #9a3412;
+      background: #fff7ed;
+      border: 1px solid #fed7aa;
       border-radius: 16px;
-      padding: 14px;
+      padding: 12px 14px;
+      font-size: 14px;
       line-height: 1.8;
+    }
+
+    .package-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+      margin-top: 14px;
+    }
+
+    @media (min-width: 900px) { .package-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+
+    .package-card {
+      position: relative;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 18px;
+      background: linear-gradient(180deg, #ffffff 0%, #fbfbfc 100%);
+      box-shadow: 0 12px 28px rgba(15,23,42,.05);
+      cursor: pointer;
+      transition: .18s ease;
+      display: block;
+    }
+
+    .package-card:hover { transform: translateY(-3px); border-color: rgba(201,162,39,.45); }
+    .package-card.selected {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(201,162,39,.12), 0 16px 30px rgba(15,23,42,.08);
+      background: linear-gradient(180deg, #fffdfa 0%, #ffffff 100%);
+    }
+
+    .package-name { font-size: 22px; font-weight: 800; color: var(--dark); line-height: 1.4; margin-bottom: 8px; }
+    .package-section-title { font-size: 14px; font-weight: 800; margin: 12px 0 8px; color: var(--dark-2); }
+
+    .package-list, .policy-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .package-list li, .policy-list li {
+      position: relative;
+      padding-right: 18px;
+      margin-bottom: 8px;
+      line-height: 1.8;
+      color: #374151;
       font-size: 14px;
     }
 
+    .package-list li::before, .policy-list li::before {
+      content: "•";
+      position: absolute;
+      right: 0;
+      top: 0;
+      color: var(--gold);
+      font-weight: 900;
+    }
+
+    .hidden-radio { display: none; }
+
+    .inline-options {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    @media (min-width: 760px) {
+      .inline-options.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .inline-options.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    }
+
+    .option-box {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 14px;
+      background: #fff;
+      cursor: pointer;
+      transition: .16s ease;
+      font-weight: 700;
+      color: var(--dark-2);
+      text-align: center;
+    }
+
+    .option-box:hover, .option-box.active {
+      border-color: var(--gold);
+      background: #fffdf6;
+    }
+
+    .sub-card {
+      margin-top: 14px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 16px;
+      background: #fcfcfd;
+    }
+
+    .price-card {
+      margin-top: 18px;
+      background: linear-gradient(135deg, #111827, #1f2937);
+      color: #fff;
+      border-radius: 24px;
+      padding: 20px;
+      box-shadow: 0 16px 30px rgba(17,24,39,.16);
+    }
+
+    .price-card h3 { margin: 0 0 10px; font-size: 24px; }
+    .price-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-top: 14px;
+    }
+    @media (min-width:760px){ .price-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+
+    .price-mini {
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 18px;
+      padding: 14px;
+    }
+
+    .price-mini .title { font-size: 13px; color: rgba(255,255,255,.75); margin-bottom: 6px; }
+    .price-mini .value { font-size: 18px; font-weight: 800; }
+    .price-number {
+      margin-top: 14px;
+      font-size: 34px;
+      font-weight: 900;
+      color: #fcd34d;
+    }
+
+    .price-note {
+      margin-top: 12px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 16px;
+      padding: 12px 14px;
+      line-height: 1.8;
+      color: rgba(255,255,255,.88);
+      font-size: 14px;
+    }
+
+    .status-inline {
+      margin-top: 10px;
+      padding: 12px 14px;
+      border-radius: 16px;
+      line-height: 1.8;
+      font-size: 14px;
+      display: none;
+    }
+    .status-inline.show { display: block; }
+    .status-inline.warn { background: #fff7ed; border: 1px solid #fed7aa; color: #9a3412; }
+    .status-inline.info { background: #eff6ff; border: 1px solid #bfdbfe; color: #1d4ed8; }
+
     .submit-wrap {
-      margin-top: 20px;
+      margin-top: 22px;
       display: flex;
       flex-direction: column;
       gap: 12px;
@@ -408,80 +556,94 @@
       border: none;
       background: linear-gradient(135deg, #111827, #1f2937);
       color: #fff;
-      font-weight: bold;
+      font-weight: 800;
+      padding: 17px;
       border-radius: 18px;
-      padding: 16px;
       cursor: pointer;
-      box-shadow: 0 12px 24px rgba(17, 24, 39, 0.18);
+      box-shadow: 0 14px 26px rgba(17,24,39,.16);
     }
 
-    .btn:hover {
-      transform: translateY(-1px);
-      opacity: .98;
-    }
-
-    .foot-note {
-      font-size: 13px;
-      color: var(--muted);
-      line-height: 1.8;
-      text-align: center;
-    }
-
-    .fade-section {
-      animation: fadeUp .22s ease;
-    }
+    .btn:hover { transform: translateY(-1px); }
+    .foot-note { text-align: center; font-size: 13px; color: var(--muted); line-height: 1.9; }
+    .fade-section { animation: fadeUp .22s ease; }
+    .hide { display: none !important; }
 
     @keyframes fadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(8px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
 <body>
   <div class="container">
     <div class="hero">
-      <div class="hero-badge">سبوت لايت • حجز إلكتروني احترافي</div>
-      <h1>سبوت لايت لحجز الزواجات</h1>
-      <p>
-        نموذج حجز أنيق وسريع ومناسب للجوال، يساعد العميل على إدخال تفاصيل المناسبة بشكل منظم وواضح.
-      </p>
-      <div class="notice">
-        لايمكن اختيار تاريخ الحجز بتاريخ اليوم او اليوم الذي يليه نرجو منك الترتيب المسبق قبل موعد المناسبة بيومين على الاقل وذلك حتى نتمكن من ترتيب طاقم التصوير ومعدات التصوير
+      <div class="hero-brand">
+        <div class="hero-logo-wrap">
+          <img src="https://www.logoai.com/oss/icons/2021/12/02/u8tXD2V7rro6bok.png" alt="شعار سبوت لايت" />
+        </div>
+        <div class="hero-title-group">
+          <div class="hero-badge">سبوت لايت • حجز إلكتروني احترافي</div>
+          <div class="hero-kicker">نموذج حجز منظم لتنسيق الزواجات والحفلات</div>
+          <h1>مجموعة سبوت لايت لتصوير الزواجات والحفلات</h1>
+        </div>
+      </div>
+      <div class="hero-contact">
+        <div class="hero-chip">📞 0568592602</div>
+        <div class="hero-chip">🤵🏻 حجز الزواجات والحفلات</div>
+        <div class="hero-chip">🗓️ يدعم التاريخ الهجري والميلادي</div>
+      </div>
+      <div class="alert">
+        لا يمكن اختيار تاريخ اليوم أو اليوم الذي يليه. نرجو الترتيب المسبق قبل المناسبة بيومين على الأقل حتى نتمكن من تجهيز طاقم ومعدات التصوير بالشكل المناسب.
       </div>
     </div>
 
-    <form class="form-card" action="https://formsubmit.co/kazim.shabib.1410@gmail.com" method="POST" target="hidden_iframe" onsubmit="return handleBooking(event)">
+    <form class="card" action="https://formsubmit.co/kazim.shabib.1410@gmail.com" method="POST" target="hidden_iframe" onsubmit="return handleBooking(event)">
       <div class="section-head">
-        <h2>بيانات العميل والمناسبة</h2>
-        <div class="section-tag">الخطوة الأولى</div>
+        <h2>1) بيانات العريس والتواصل</h2>
+        <div class="section-badge">الخطوة الأولى</div>
+      </div>
+
+      <div class="grid grid-3">
+        <div class="field">
+          <label for="groomName">🤵🏻 اسم العريس</label>
+          <input id="groomName" name="اسم العريس" type="text" required placeholder="اكتب اسم العريس الكامل" />
+        </div>
+        <div class="field">
+          <label for="groomPhone">📱 رقم جوال العريس</label>
+          <input id="groomPhone" name="رقم جوال العريس" type="tel" required placeholder="05xxxxxxxx" />
+        </div>
+        <div class="field">
+          <label for="altPhone">📱 رقم أخر (اخ او صديق)</label>
+          <input id="altPhone" name="رقم أخر اخ او صديق" type="tel" placeholder="رقم احتياطي للتواصل" />
+        </div>
+      </div>
+
+      <div class="section-head" style="margin-top:24px;">
+        <h2>2) موقع المناسبة والتاريخ</h2>
+        <div class="section-badge">الخطوة الثانية</div>
       </div>
 
       <div class="grid grid-2">
         <div class="field">
-          <label for="customerName">اسم العميل</label>
-          <input id="customerName" name="اسم العميل" type="text" required placeholder="اكتب الاسم الكامل" />
+          <label for="locationType">📍 موقع المناسبة</label>
+          <select id="locationType" name="موقع المناسبة" required onchange="toggleLocationPackages()">
+            <option value="">اختر موقع المناسبة</option>
+            <option value="الأحساء">الأحساء</option>
+            <option value="خارج الأحساء">خارج الأحساء</option>
+          </select>
         </div>
         <div class="field">
-          <label for="customerPhone">رقم الجوال</label>
-          <input id="customerPhone" name="رقم الجوال" type="tel" required placeholder="05xxxxxxxx" />
+          <label for="hallName">🪩 اسم القاعة أو الموقع</label>
+          <input id="hallName" name="اسم القاعة أو الموقع" type="text" required placeholder="اكتب اسم القاعة أو الموقع" />
         </div>
       </div>
 
-      <div class="field" style="margin-top:14px;">
-        <label>تاريخ المناسبة</label>
-        <div class="calendar-legend">
-          <div class="legend-item"><span class="legend-color legend-green"></span> متاح</div>
-          <div class="legend-item"><span class="legend-color legend-red"></span> غير متاح</div>
-          <div class="legend-item"><span class="legend-color legend-gray"></span> لايمكن الحجز في هذا التاريخ</div>
-          <div class="legend-item"><span class="legend-color legend-selected"></span> التاريخ المختار</div>
-        </div>
+      <div id="outsidePackages" class="info-strip hide">
+        تم اختيار خارج الأحساء. يمكن استقبال الطلب الآن، وسيتم التواصل لتحديد باقات وأسعار خارج الأحساء بشكل مستقل.
+      </div>
 
+      <div class="field" style="margin-top:14px;">
+        <label>🗓️ اختر تاريخ المناسبة</label>
         <div class="calendar-shell">
           <div class="calendar-header">
             <button class="calendar-nav" type="button" onclick="changeMonth(-1)">السابق</button>
@@ -498,182 +660,296 @@
             <div class="weekday">الجمعة</div>
             <div class="weekday">السبت</div>
           </div>
+          <div id="calendarGrid" class="calendar-grid"></div>
 
-          <div class="calendar-grid" id="calendarGrid"></div>
-          <input id="eventDate" name="تاريخ المناسبة" type="hidden" required />
-          <div class="selected-date-box" id="selectedDateBox">لم يتم اختيار تاريخ بعد</div>
+          <div id="selectedDateBox" class="selected-date-box">لم يتم اختيار تاريخ بعد</div>
+          <div class="date-warning-inline">في حال اختلاف التاريخ الهجري سيتم اعتماد التاريخ الميلادي.</div>
         </div>
       </div>
 
-      <div class="grid grid-2" style="margin-top:14px;">
+      <input type="hidden" id="eventDate" name="تاريخ المناسبة المختار" required />
+
+      <div class="grid grid-3" style="margin-top:14px;">
         <div class="field">
-          <label for="eventType">نوع المناسبة</label>
-          <select id="eventType" name="نوع المناسبة" required onchange="toggleEventSections()">
-            <option value="">اختر المناسبة</option>
-            <option value="زواج">زواج</option>
-            <option value="ملكة">ملكة</option>
-            <option value="حفل تخرج">حفل تخرج</option>
-            <option value="مناسبة خاصة">مناسبة خاصة</option>
-          </select>
+          <label for="hijriDate">🗓️ التاريخ الهجري</label>
+          <input id="hijriDate" name="التاريخ الهجري" type="text" readonly placeholder="يظهر بعد اختيار التاريخ" />
         </div>
         <div class="field">
-          <label for="customEventType">وصف نوع المناسبة</label>
-          <input id="customEventType" name="وصف نوع المناسبة" type="text" required placeholder="اكتب نوع المناسبة بشكل واضح" />
+          <label for="gregorianDate">🗓️ التاريخ الميلادي</label>
+          <input id="gregorianDate" name="التاريخ الميلادي" type="text" readonly placeholder="يظهر بعد اختيار التاريخ" />
+        </div>
+        <div class="field">
+          <label for="dayName">📆 اليوم</label>
+          <input id="dayName" name="اليوم" type="text" readonly placeholder="يظهر بعد اختيار التاريخ" />
         </div>
       </div>
 
-      <div class="field" style="margin-top:14px;">
-        <label for="generalNotes">ملاحظات عامة</label>
-        <textarea id="generalNotes" name="ملاحظات عامة" placeholder="اكتب أي تفاصيل إضافية هنا"></textarea>
-      </div>
-
-      <div id="marriageSections" class="fade-section">
-        <div class="box">
-          <h3>الحلاق</h3>
-          <div class="grid grid-2">
-            <div class="field">
-              <label for="barberTime">وقت الحلاق</label>
-              <input id="barberTime" name="وقت الحلاق" type="time" />
-              <div class="time-note">سوف نكون متواجدين في الموقع قبل الموعد ب١٥ دقيقه
-نرجو منك كتابة الموعد الصحيح بدقه والالتزام بالموعد المحدد</div>
-            </div>
-            <div class="field">
-              <label for="barberPlace">مكان الحلاق</label>
-              <input id="barberPlace" name="مكان الحلاق" type="text" placeholder="مثال: صالون أو منزل" />
-            </div>
-          </div>
-          <div class="grid grid-2">
-            <div class="field">
-              <label for="barberCoords">إحداثيات موقع الحلاق</label>
-              <input id="barberCoords" name="إحداثيات موقع الحلاق" class="readonly-map" type="text" placeholder="مثال: 26.4207, 50.0888" />
-            </div>
-            <div class="field">
-              <label for="barberMapLink">رابط موقع الحلاق من Google Maps</label>
-              <input id="barberMapLink" name="رابط موقع الحلاق" type="url" placeholder="الصق رابط الموقع من قوقل ماب" />
-            </div>
-          </div>
+      <div class="sub-card">
+        <div class="field">
+          <label><strong>📍 معلومات مكان الحفل</strong></label>
         </div>
-
-        <div class="box">
-          <h3>السباحة</h3>
-          <div class="grid grid-2">
-            <div class="field">
-              <label for="swimTime">وقت السباحة</label>
-              <input id="swimTime" name="وقت السباحة" type="time" />
-              <div class="time-note">سوف نكون متواجدين في الموقع قبل الموعد ب١٥ دقيقه
-نرجو منك كتابة الموعد الصحيح بدقه والالتزام بالموعد المحدد</div>
-            </div>
-            <div class="field">
-              <label for="resortName">اسم الاستراحه</label>
-              <input id="resortName" name="اسم الاستراحة" type="text" placeholder="اكتب اسم الاستراحه" />
-            </div>
+        <div class="grid grid-2" style="margin-top:14px;">
+          <div class="field">
+            <label for="eventVenueName">🏕️ اسم الاستراحة أو القاعة</label>
+            <input id="eventVenueName" name="اسم مكان الحفل" type="text" placeholder="اكتب اسم الاستراحة أو القاعة" />
           </div>
-          <div class="grid grid-2">
-            <div class="field">
-              <label for="resortLocation">موقع الاستراحه</label>
-              <input id="resortLocation" name="موقع الاستراحة" type="text" placeholder="اسم الموقع أو الحي" />
-            </div>
-            <div class="field">
-              <label for="resortMapLink">رابط موقع الاستراحه من Google Maps</label>
-              <input id="resortMapLink" name="رابط موقع الاستراحة" type="url" placeholder="الصق رابط الموقع من قوقل ماب" />
-            </div>
-          </div>
-        </div>
-
-        <div class="box">
-          <h3>زفة المنزل</h3>
-          <div class="grid grid-2">
-            <div class="field">
-              <label for="homeZaffaLocation">موقع زفة المنزل</label>
-              <input id="homeZaffaLocation" name="موقع زفة المنزل" type="text" placeholder="اكتب وصف الموقع" />
-            </div>
-            <div class="field">
-              <label for="homeZaffaMapLink">رابط موقع زفة المنزل من Google Maps</label>
-              <input id="homeZaffaMapLink" name="رابط زفة المنزل" type="url" placeholder="الصق رابط الموقع من قوقل ماب" />
-            </div>
-          </div>
-        </div>
-
-        <div class="box">
-          <h3>حفل الزفاف</h3>
-          <div class="grid grid-2">
-            <div class="field">
-              <label for="hallName">اسم القاعه</label>
-              <input id="hallName" name="اسم القاعة" type="text" placeholder="اكتب اسم القاعه" />
-            </div>
-            <div class="field">
-              <label for="weddingTime">وقت حفل الزفاف</label>
-              <input id="weddingTime" name="وقت حفل الزفاف" type="time" />
-              <div class="time-note">سوف نكون متواجدين في صالة حفل الزفاف قبل الموعد بساعه كامله
-نرجو منك كتابة الموعد الصحيح بدقه والالتزام بالموعد المحدد</div>
-            </div>
-          </div>
-          <div class="grid grid-2">
-            <div class="field">
-              <label for="hallLocation">موقع الحفل</label>
-              <input id="hallLocation" name="موقع الحفل" type="text" placeholder="اكتب وصف الموقع أو الحي" />
-            </div>
-            <div class="field">
-              <label for="hallMapLink">رابط موقع الحفل من Google Maps</label>
-              <input id="hallMapLink" name="رابط موقع الحفل" type="url" placeholder="الصق رابط الموقع من قوقل ماب" />
+          <div class="field">
+            <label for="eventVenueLocation">📍 موقع الاستراحة أو القاعة</label>
+            <div class="map-input-row">
+              <input id="eventVenueLocation" name="موقع مكان الحفل" type="text" placeholder="اكتب الموقع أو الصق رابط Google Maps" />
+              <a class="map-link-btn" href="https://www.google.com/maps" target="_blank" rel="noopener">اختيار الموقع من الخريطة</a>
             </div>
           </div>
         </div>
       </div>
 
-      <div id="malkaSection" class="box fade-section" style="display:none;">
-        <h3>بيانات الملكة</h3>
-        <div class="grid grid-2">
-          <div class="field">
-            <label for="malkaLocation">موقع الملكة</label>
-            <input id="malkaLocation" name="موقع الملكة" type="text" placeholder="اكتب موقع الملكة" />
+      <div class="section-head" style="margin-top:24px;">
+        <h2>3) الباقات</h2>
+        <div class="section-badge">الخطوة الثالثة</div>
+      </div>
+
+      <div id="ahsaPackages" class="package-grid">
+        <label class="package-card" onclick="selectPackage('باقة الوسامة', this)">
+          <input class="hidden-radio" type="radio" name="الباقة" value="باقة الوسامة" required />
+          <div class="package-name">باقة الوسامة</div>
+          <div class="package-section-title">تشمل</div>
+          <ul class="package-list">
+            <li>تصوير فيديو</li>
+            <li>تصوير فوتوغرافي</li>
+            <li>مونتاج</li>
+          </ul>
+          <div class="package-section-title">خدمات الباقة الإضافية</div>
+          <ul class="package-list">
+            <li>طباعة صور خشب A4 عدد 2</li>
+            <li>تصميم دعوة</li>
+            <li>تصميم جدول العريس</li>
+            <li>فلاش ميموري لجميع الصور</li>
+          </ul>
+        </label>
+
+        <label class="package-card" onclick="selectPackage('الباقة الذهبية', this)">
+          <input class="hidden-radio" type="radio" name="الباقة" value="الباقة الذهبية" required />
+          <div class="package-name">الباقة الذهبية</div>
+          <div class="package-section-title">تشمل</div>
+          <ul class="package-list">
+            <li>تصوير فيديو</li>
+            <li>تصوير فوتوغرافي</li>
+            <li>مونتاج</li>
+          </ul>
+          <div class="package-section-title">خدمات الباقة الإضافية</div>
+          <ul class="package-list">
+            <li>طباعة ألبوم حراري مقاس A4</li>
+            <li>يتوفر ألبوم حراري A4 فاخر بالطلب</li>
+            <li>تصميم الدعوة</li>
+            <li>تصميم جدول الزواج</li>
+            <li>فلاش ميموري لجميع الصور</li>
+            <li>مخطوطة باسم العريس في الألبوم الحراري</li>
+          </ul>
+        </label>
+
+        <label class="package-card" onclick="selectPackage('باقة سبوت لايت الراقي', this)">
+          <input class="hidden-radio" type="radio" name="الباقة" value="باقة سبوت لايت الراقي" required />
+          <div class="package-name">باقة سبوت لايت الراقي</div>
+          <div class="package-section-title">تشمل</div>
+          <ul class="package-list">
+            <li>تصوير فيديو</li>
+            <li>تصوير فوتوغرافي</li>
+            <li>مونتاج</li>
+          </ul>
+          <div class="package-section-title">خدمات الباقة الإضافية</div>
+          <ul class="package-list">
+            <li>تصميم جدول</li>
+            <li>تصميم الدعوة</li>
+            <li>ألبوم حراري مقاس A3 مع الشنطة الحرارية</li>
+            <li>فلاش ميموري لجميع الصور</li>
+            <li>مخطوطة باسم العريس في الألبوم الحراري</li>
+          </ul>
+        </label>
+      </div>
+
+      <input type="hidden" id="selectedPackage" name="الباقة المختارة" required />
+
+      <div class="sub-card">
+        <div class="field">
+          <label><strong>إضافة تصوير حلاق</strong></label>
+          <div class="inline-options two">
+            <div class="option-box" onclick="setBinary('barberAdded','نعم', this, 'barberDetails'); updatePricing();">نعم</div>
+            <div class="option-box active" onclick="setBinary('barberAdded','لا', this, 'barberDetails'); updatePricing();">لا</div>
           </div>
-          <div class="field">
-            <label for="malkaMapLink">رابط موقع الملكة من Google Maps</label>
-            <input id="malkaMapLink" name="رابط موقع الملكة" type="url" placeholder="الصق رابط الموقع من قوقل ماب" />
+          <input type="hidden" id="barberAdded" name="إضافة تصوير حلاق" value="لا" />
+        </div>
+        <div id="barberDetails" class="hide fade-section">
+          <div class="grid grid-2" style="margin-top:14px;">
+            <div class="field">
+              <label for="barberDate">تاريخ الحلاق</label>
+              <input id="barberDate" name="تاريخ الحلاق" type="date" placeholder="day/month/year" />
+            </div>
+            <div class="field">
+              <label for="barberDay">اليوم</label>
+              <input id="barberDay" name="يوم الحلاق" type="text" readonly placeholder="يظهر تلقائيًا" />
+            </div>
+            <div class="field">
+              <label for="barberName">اسم الحلاق</label>
+              <input id="barberName" name="اسم الحلاق" type="text" placeholder="اكتب اسم الحلاق" />
+            </div>
+            <div class="field">
+              <label for="barberLocation">موقع الحلاق</label>
+              <div class="map-input-row">
+                <input id="barberLocation" name="موقع الحلاق" type="text" placeholder="اكتب الموقع أو الصق رابط Google Maps" />
+                <a class="map-link-btn" href="https://www.google.com/maps" target="_blank" rel="noopener">اختيار الموقع من الخريطة</a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      <div id="graduationSection" class="box fade-section" style="display:none;">
-        <h3>بيانات حفل التخرج</h3>
-        <div class="grid grid-2">
-          <div class="field">
-            <label for="graduationPlace">مكان حفل التخرج</label>
-            <input id="graduationPlace" name="مكان حفل التخرج" type="text" placeholder="اكتب مكان الحفل" />
+      <div class="sub-card">
+        <div class="field">
+          <label><strong>إضافة فترة السباحة</strong></label>
+          <div class="inline-options two">
+            <div class="option-box" onclick="setBinary('sabhaAdded','نعم', this, 'sabhaDetails'); updatePricing();">نعم</div>
+            <div class="option-box active" onclick="setBinary('sabhaAdded','لا', this, 'sabhaDetails'); updatePricing();">لا</div>
           </div>
-          <div class="field">
-            <label for="graduationMapLink">رابط موقع حفل التخرج من Google Maps</label>
-            <input id="graduationMapLink" name="رابط موقع حفل التخرج" type="url" placeholder="الصق رابط الموقع من قوقل ماب" />
+          <input type="hidden" id="sabhaAdded" name="إضافة فترة السباحة" value="لا" />
+        </div>
+        <div id="sabhaDetails" class="hide fade-section">
+          <div class="grid grid-2" style="margin-top:14px;">
+            <div class="field">
+              <label for="sabhaDate">تاريخ السباحة</label>
+              <input id="sabhaDate" name="تاريخ السباحة" type="date" placeholder="day/month/year" />
+            </div>
+            <div class="field">
+              <label for="sabhaDay">اليوم</label>
+              <input id="sabhaDay" name="يوم السباحة" type="text" readonly placeholder="يظهر تلقائيًا" />
+            </div>
+            <div class="field">
+              <label for="sabhaRestName">اسم الاستراحة</label>
+              <input id="sabhaRestName" name="اسم استراحة السباحة" type="text" placeholder="اكتب اسم الاستراحة" />
+            </div>
+            <div class="field">
+              <label for="sabhaRestLocation">موقع الاستراحة</label>
+              <div class="map-input-row">
+                <input id="sabhaRestLocation" name="موقع استراحة السباحة" type="text" placeholder="اكتب الموقع أو الصق رابط Google Maps" />
+                <a class="map-link-btn" href="https://www.google.com/maps" target="_blank" rel="noopener">اختيار الموقع من الخريطة</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="field" style="margin-top:14px;">
+            <label>هل السباحة في حمام مغربي؟</label>
+            <div class="inline-options two">
+              <div class="option-box" onclick="setBinary('moroccanBath','نعم', this, 'moroccanBathWrap')">نعم</div>
+              <div class="option-box active" onclick="setBinary('moroccanBath','لا', this, 'moroccanBathWrap')">لا</div>
+            </div>
+            <input type="hidden" id="moroccanBath" name="هل السباحة في حمام مغربي" value="لا" />
+          </div>
+
+          <div id="moroccanBathWrap" class="hide fade-section" style="margin-top:14px;">
+            <div class="grid grid-2">
+              <div class="field">
+                <label for="moroccanBathName">اسم الحمام المغربي</label>
+                <input id="moroccanBathName" name="اسم الحمام المغربي" type="text" placeholder="اكتب اسم الحمام المغربي" />
+              </div>
+              <div class="field">
+                <label for="moroccanBathLocation">موقع الحمام المغربي</label>
+                <div class="map-input-row">
+                  <input id="moroccanBathLocation" name="موقع الحمام المغربي" type="text" placeholder="اكتب الموقع أو الصق رابط Google Maps" />
+                  <a class="map-link-btn" href="https://www.google.com/maps" target="_blank" rel="noopener">اختيار الموقع من الخريطة</a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      <div id="specialSection" class="box fade-section" style="display:none;">
-        <h3>بيانات المناسبة الخاصة</h3>
-        <div class="grid grid-2">
-          <div class="field">
-            <label for="specialPlace">مكان المناسبة الخاصة</label>
-            <input id="specialPlace" name="مكان المناسبة الخاصة" type="text" placeholder="اكتب مكان المناسبة" />
+      <div class="sub-card">
+        <div class="field">
+          <label>هل حاب تضيف تصوير درون للحفل؟</label>
+          <div class="inline-options two">
+            <div class="option-box" onclick="setBinary('droneAdded','نعم', this)">نعم</div>
+            <div class="option-box active" onclick="setBinary('droneAdded','لا', this)">لا</div>
           </div>
-          <div class="field">
-            <label for="specialMapLink">رابط موقع المناسبة الخاصة من Google Maps</label>
-            <input id="specialMapLink" name="رابط موقع المناسبة الخاصة" type="url" placeholder="الصق رابط الموقع من قوقل ماب" />
-          </div>
-        </div>
-        <div class="notice" style="margin-top:12px; background:#fff4e5; color:#8a4b00; border-color:#f6d3a5;">
-          في حال اختيار مناسبة خاصة سيتم استلام الطلب مبدئيًا فقط، ولن يتم تأكيد الحجز إلا بعد التواصل مع العميل ومراجعة نوع المناسبة.
+          <input type="hidden" id="droneAdded" name="إضافة تصوير درون" value="لا" />
         </div>
       </div>
 
-      <input type="hidden" name="_subject" value="حجز جديد من سبوت لايت" />
+      <div class="sub-card">
+        <div class="field">
+          <label>🟥 هل الحلاق والسبحة قبل بيوم؟</label>
+          <div class="inline-options two">
+            <div class="option-box" onclick="setBinary('beforeDay','نعم', this)">نعم</div>
+            <div class="option-box active" onclick="setBinary('beforeDay','لا', this)">لا</div>
+          </div>
+          <input type="hidden" id="beforeDay" name="هل الحلاق والسبحة قبل بيوم" value="لا" />
+        </div>
+      </div>
+
+      <div class="sub-card">
+        <div class="field">
+          <label>⛔ هل توجد إضافات على الحجز؟</label>
+          <div class="inline-options two">
+            <div class="option-box" onclick="setBinary('hasExtras','نعم', this, 'extrasNotesWrap')">نعم</div>
+            <div class="option-box active" onclick="setBinary('hasExtras','لا', this, 'extrasNotesWrap')">لا</div>
+          </div>
+          <input type="hidden" id="hasExtras" name="هل توجد إضافات على الحجز" value="لا" />
+        </div>
+
+        <div id="extrasNotesWrap" class="field hide" style="margin-top:14px;">
+          <label for="extrasNotes">اكتب الملاحظات والإضافات</label>
+          <textarea id="extrasNotes" name="الملاحظات والإضافات" placeholder="مثال: دعوة، بنر، تفاصيل إضافية، ملاحظات على التصوير..."></textarea>
+        </div>
+      </div>
+
+      <div class="price-card" id="priceCard">
+        <h3>الأسعار حسب الاختيارات</h3>
+        <div class="price-grid">
+          <div class="price-mini">
+            <div class="title">الباقة المختارة</div>
+            <div class="value" id="pricePackageLabel">—</div>
+          </div>
+          <div class="price-mini">
+            <div class="title">نوع الحجز</div>
+            <div class="value" id="priceComboLabel">الحفل فقط</div>
+          </div>
+          <div class="price-mini">
+            <div class="title">إضافة العريس الثاني</div>
+            <div class="value" id="secondGroomLabel">حسب الباقة</div>
+          </div>
+        </div>
+
+        <div class="price-number" id="finalPriceLabel">0 ريال</div>
+
+        <div class="price-note" id="priceNote">
+          اختر الباقة أولًا، ثم حدّد هل يوجد تصوير حلاق أو فترة سباحة، وسيتم احتساب السعر تلقائيًا. الحفل هو الأساس في هذه الباقات.
+        </div>
+
+        <div id="pricingStatus" class="status-inline"></div>
+        <input type="hidden" id="calculatedPrice" name="السعر المحسوب" value="" />
+        <input type="hidden" id="bookingType" name="نوع الحجز المحسوب" value="" />
+      </div>
+
+      <div class="section-head" style="margin-top:24px;">
+        <h2>4) بنود وشروط الحجز</h2>
+        <div class="section-badge">ثابتة</div>
+      </div>
+
+      <div class="warning-box">
+        <ul class="policy-list">
+          <li>يتم تحويل باقي المبلغ قبل المناسبة.</li>
+          <li>عند حجز بركة أو حمام مغربي يكون التصوير فقط في موقع واحد دون الذهاب إلى موقع آخر بما فيهم موقع منزل العريس.</li>
+          <li>نهاية وقت المصورين الساعة 12، وفي حال طلب العريس جلوس المصورين فوق الساعة 12 ينحسب مبلغ إضافي للمصور 100 ريال، وفي حال عدم الرغبة بالدفع الإضافي يحق للمصور المغادرة.</li>
+        </ul>
+      </div>
+
+      <input type="hidden" name="_subject" value="طلب حجز جديد من نموذج سبوت لايت" />
       <input type="hidden" name="_template" value="table" />
       <input type="hidden" name="_captcha" value="false" />
+      <input type="hidden" name="_autoresponse" value="تم استلام طلب الحجز بنجاح، وسيتم التواصل معكم قريبًا لتأكيد التفاصيل." />
 
       <div class="submit-wrap">
-        <button class="btn" type="submit">تأكيد الحجز</button>
-        <div id="successMessage" class="success-box">تم استلام الطلب.</div>
-        <div class="foot-note">هذه النسخة للتجربة. قفل التواريخ حاليًا يعتمد على نفس المتصفح فقط، وليس كل الأجهزة.</div>
+        <button class="btn" type="submit">إتمام الحجز</button>
+        <div id="successMessage" class="success-box">تم استلام الطلب بنجاح.</div>
+        <div class="foot-note">تم تحديث النسخة وفق الملاحظات الحالية، مع تسعير تلقائي حسب الباقة والاختيارات الأساسية.</div>
       </div>
     </form>
 
@@ -681,12 +957,10 @@
   </div>
 
   <script>
-    let bookings = JSON.parse(localStorage.getItem("bookings") || "{}");
+    let bookings = JSON.parse(localStorage.getItem("spotlightBookings") || "{}");
 
-    const monthNames = [
-      "يناير", "فبراير", "مارس", "أبريل", "مايو", "يونيو",
-      "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"
-    ];
+    const monthNames = ["يناير","فبراير","مارس","أبريل","مايو","يونيو","يوليو","أغسطس","سبتمبر","أكتوبر","نوفمبر","ديسمبر"];
+    const dayNames = ["الأحد","الاثنين","الثلاثاء","الأربعاء","الخميس","الجمعة","السبت"];
 
     const today = new Date();
     const currentDateOnly = new Date(today.getFullYear(), today.getMonth(), today.getDate());
@@ -696,12 +970,77 @@
     let currentYear = today.getFullYear();
     let selectedDate = "";
 
-    function pad(num) {
-      return String(num).padStart(2, "0");
+    function pad(num) { return String(num).padStart(2, "0"); }
+    function formatDate(year, month, day) { return `${year}-${pad(month + 1)}-${pad(day)}`; }
+
+    function buildWhatsAppMessage() {
+      const groomName = document.getElementById('groomName').value.trim() || 'غير مذكور';
+      const groomPhone = document.getElementById('groomPhone').value.trim() || 'غير مذكور';
+      const altPhone = document.getElementById('altPhone').value.trim() || 'لا يوجد';
+      const locationType = document.getElementById('locationType').value || 'غير محدد';
+      const hallName = document.getElementById('hallName').value.trim() || 'غير مذكور';
+      const eventDate = document.getElementById('eventDate').value || 'غير محدد';
+      const hijriDate = document.getElementById('hijriDate').value || 'غير محدد';
+      const gregorianDate = document.getElementById('gregorianDate').value || 'غير محدد';
+      const dayName = document.getElementById('dayName').value || 'غير محدد';
+      const selectedPackage = document.getElementById('selectedPackage').value || 'غير محددة';
+      const calculatedPrice = document.getElementById('calculatedPrice').value || 'يحتاج مراجعة';
+      const bookingType = document.getElementById('bookingType').value || 'غير محدد';
+      const barberAdded = document.getElementById('barberAdded').value || 'لا';
+      const sabhaAdded = document.getElementById('sabhaAdded').value || 'لا';
+      const droneAdded = document.getElementById('droneAdded').value || 'لا';
+      const beforeDay = document.getElementById('beforeDay').value || 'لا';
+      const extras = document.getElementById('extrasNotes').value.trim() || 'لا توجد';
+
+      return [
+        'طلب حجز جديد من نموذج سبوت لايت',
+        '',
+        `اسم العريس: ${groomName}`,
+        `رقم الجوال: ${groomPhone}`,
+        `رقم إضافي: ${altPhone}`,
+        `الموقع: ${locationType}`,
+        `اسم القاعة أو الموقع: ${hallName}`,
+        `تاريخ المناسبة: ${eventDate}`,
+        `التاريخ الهجري: ${hijriDate}`,
+        `التاريخ الميلادي: ${gregorianDate}`,
+        `اليوم: ${dayName}`,
+        `الباقة: ${selectedPackage}`,
+        `نوع الحجز: ${bookingType}`,
+        `السعر: ${calculatedPrice}`,
+        `إضافة الحلاق: ${barberAdded}`,
+        `إضافة السباحة: ${sabhaAdded}`,
+        `إضافة الدرون: ${droneAdded}`,
+        `قبل بيوم: ${beforeDay}`,
+        `الإضافات والملاحظات: ${extras}`
+      ].join('
+');
     }
 
-    function formatDate(year, month, day) {
-      return `${year}-${pad(month + 1)}-${pad(day)}`;
+    function openWhatsAppNotification() {
+      const message = buildWhatsAppMessage();
+      const url = `https://wa.me/966547338905?text=${encodeURIComponent(message)}`;
+      window.open(url, '_blank', 'noopener');
+    }
+
+    function prepareDateInputs() {
+      ['barberDate', 'sabhaDate'].forEach(function(id) {
+        const input = document.getElementById(id);
+        if (!input) return;
+        input.setAttribute('title', 'day/month/year');
+        input.setAttribute('aria-label', 'day/month/year');
+      });
+    }
+
+    function getHijriDateString(dateObj) {
+      try {
+        return new Intl.DateTimeFormat('ar-SA-u-ca-islamic', { day: 'numeric', month: 'long', year: 'numeric' }).format(dateObj);
+      } catch (e) {
+        return "تعذر تحويل التاريخ الهجري";
+      }
+    }
+
+    function getGregorianDateString(dateObj) {
+      return new Intl.DateTimeFormat('ar-SA', { day: 'numeric', month: 'long', year: 'numeric' }).format(dateObj);
     }
 
     function isPastDate(year, month, day) {
@@ -733,9 +1072,10 @@
 
       for (let day = 1; day <= daysInMonth; day++) {
         const dateKey = formatDate(currentYear, currentMonth, day);
+        const cellDate = new Date(currentYear, currentMonth, day);
         const dayCell = document.createElement("div");
-        dayCell.textContent = day;
         dayCell.className = "calendar-day";
+        dayCell.innerHTML = `<div>${day}</div><small>${dayNames[cellDate.getDay()]}</small>`;
 
         const booked = bookings[dateKey] === 1;
         const past = isPastDate(currentYear, currentMonth, day);
@@ -747,132 +1087,244 @@
           dayCell.classList.add("booked");
         } else {
           dayCell.classList.add("available");
-          dayCell.addEventListener("click", function () {
-            selectedDate = dateKey;
-            document.getElementById("eventDate").value = selectedDate;
-            selectedDateBox.textContent = `التاريخ المختار: ${selectedDate}`;
-            renderCalendar();
-          });
+          dayCell.addEventListener("click", function () { selectMainDate(dateKey); });
         }
 
-        if (selectedDate === dateKey) {
-          dayCell.classList.add("selected");
-        }
-
+        if (selectedDate === dateKey) dayCell.classList.add("selected");
         calendarGrid.appendChild(dayCell);
       }
 
-      if (!selectedDate) {
-        selectedDateBox.textContent = "لم يتم اختيار تاريخ بعد";
-      }
+      if (!selectedDate) selectedDateBox.textContent = "لم يتم اختيار تاريخ بعد";
     }
 
-    function changeMonth(step) {
-      currentMonth += step;
+    function selectMainDate(dateKey) {
+      selectedDate = dateKey;
+      document.getElementById("eventDate").value = selectedDate;
+      const dateObj = new Date(dateKey + 'T12:00:00');
+      const hijri = getHijriDateString(dateObj);
+      const greg = getGregorianDateString(dateObj);
+      const day = dayNames[dateObj.getDay()];
 
-      if (currentMonth < 0) {
-        currentMonth = 11;
-        currentYear--;
-      }
+      document.getElementById("hijriDate").value = hijri;
+      document.getElementById("gregorianDate").value = greg;
+      document.getElementById("dayName").value = day;
 
-      if (currentMonth > 11) {
-        currentMonth = 0;
-        currentYear++;
-      }
+      document.getElementById("selectedDateBox").innerHTML = `
+        <strong>التاريخ المختار:</strong> ${selectedDate}<br>
+        <strong>الهجري:</strong> ${hijri}<br>
+        <strong>الميلادي:</strong> ${greg}<br>
+        <strong>اليوم:</strong> ${day}
+      `;
 
       renderCalendar();
     }
 
-    function toggleEventSections() {
-      const type = document.getElementById("eventType").value;
-      const marriage = document.getElementById("marriageSections");
-      const malka = document.getElementById("malkaSection");
-      const graduation = document.getElementById("graduationSection");
-      const special = document.getElementById("specialSection");
-
-      marriage.style.display = type === "زواج" ? "block" : "none";
-      malka.style.display = type === "ملكة" ? "block" : "none";
-      graduation.style.display = type === "حفل تخرج" ? "block" : "none";
-      special.style.display = type === "مناسبة خاصة" ? "block" : "none";
+    function changeMonth(step) {
+      currentMonth += step;
+      if (currentMonth < 0) { currentMonth = 11; currentYear--; }
+      if (currentMonth > 11) { currentMonth = 0; currentYear++; }
+      renderCalendar();
     }
 
-    function handleBooking(e) {
-      const eventDate = document.getElementById("eventDate").value;
-      const eventType = document.getElementById("eventType").value;
-      const customEventType = document.getElementById("customEventType").value.trim();
-      const successBox = document.getElementById("successMessage");
+    function selectPackage(packageName, card) {
+      document.getElementById('selectedPackage').value = packageName;
+      const radio = card.querySelector('input[type="radio"]');
+      if (radio) radio.checked = true;
+      document.querySelectorAll('.package-card').forEach(el => el.classList.remove('selected'));
+      card.classList.add('selected');
+      updatePricing();
+    }
 
+    function setBinary(hiddenId, value, element, toggleId = null) {
+      document.getElementById(hiddenId).value = value;
+      const wrap = element.parentElement;
+      wrap.querySelectorAll('.option-box').forEach(box => box.classList.remove('active'));
+      element.classList.add('active');
+
+      if (toggleId) {
+        const target = document.getElementById(toggleId);
+        if (target) target.classList.toggle('hide', value !== 'نعم');
+      }
+    }
+
+    function toggleLocationPackages() {
+      const locationType = document.getElementById('locationType').value;
+      const outsideNote = document.getElementById('outsidePackages');
+      const packages = document.getElementById('ahsaPackages');
+
+      if (locationType === 'خارج الأحساء') {
+        outsideNote.classList.remove('hide');
+        packages.style.opacity = '0.55';
+      } else {
+        outsideNote.classList.add('hide');
+        packages.style.opacity = '1';
+      }
+    }
+
+    function updateDayFromDate(dateInputId, dayInputId) {
+      const dateValue = document.getElementById(dateInputId).value;
+      const dayInput = document.getElementById(dayInputId);
+      if (!dateValue) {
+        dayInput.value = '';
+        return;
+      }
+      const dateObj = new Date(dateValue + 'T12:00:00');
+      dayInput.value = dayNames[dateObj.getDay()];
+    }
+
+    function getPricing(packageName, barber, sabha) {
+      const tables = {
+        'باقة الوسامة': {
+          full: 2300,
+          sabha: 2000,
+          hafl: 1600,
+          second: 800
+        },
+        'الباقة الذهبية': {
+          full: 3200,
+          sabha: 2800,
+          hafl: 2450,
+          second: 1500
+        },
+        'باقة سبوت لايت الراقي': {
+          full: 3700,
+          sabha: 3400,
+          hafl: 3000,
+          second: 1700
+        }
+      };
+
+      const pkg = tables[packageName];
+      if (!pkg) return { combo: '—', price: 0, second: 0, supported: false, note: 'اختر الباقة أولًا.' };
+
+      if (barber === 'نعم' && sabha === 'نعم') {
+        return { combo: 'حلاق + سباحة + حفل الزواج', price: pkg.full, second: pkg.second, supported: true, note: 'التصوير للدعوة والبنر لا يشمل قيمة الباقة.' };
+      }
+      if (barber === 'لا' && sabha === 'نعم') {
+        return { combo: 'سباحة + حفل الزواج', price: pkg.sabha, second: pkg.second, supported: true, note: 'التصوير للدعوة والبنر لا يشمل قيمة الباقة.' };
+      }
+      if (barber === 'لا' && sabha === 'لا') {
+        return { combo: 'حفل الزواج', price: pkg.hafl, second: pkg.second, supported: true, note: 'التصوير للدعوة والبنر لا يشمل قيمة الباقة.' };
+      }
+
+      return {
+        combo: 'حلاق + حفل',
+        price: 0,
+        second: pkg.second,
+        supported: false,
+        note: 'هذا الاختيار غير موجود ضمن التسعير الثابت الحالي، وسيحتاج مراجعة وتأكيد يدوي.'
+      };
+    }
+
+    function updatePricing() {
+      const selectedPackage = document.getElementById('selectedPackage').value;
+      const barber = document.getElementById('barberAdded').value;
+      const sabha = document.getElementById('sabhaAdded').value;
+      const locationType = document.getElementById('locationType').value;
+      const statusBox = document.getElementById('pricingStatus');
+      const pricePackageLabel = document.getElementById('pricePackageLabel');
+      const priceComboLabel = document.getElementById('priceComboLabel');
+      const secondGroomLabel = document.getElementById('secondGroomLabel');
+      const finalPriceLabel = document.getElementById('finalPriceLabel');
+      const priceNote = document.getElementById('priceNote');
+      const calculatedPrice = document.getElementById('calculatedPrice');
+      const bookingType = document.getElementById('bookingType');
+
+      pricePackageLabel.textContent = selectedPackage || '—';
+
+      if (locationType === 'خارج الأحساء') {
+        priceComboLabel.textContent = 'خارج الأحساء';
+        secondGroomLabel.textContent = 'يتم التحديد لاحقًا';
+        finalPriceLabel.textContent = 'يتم التسعير بعد المراجعة';
+        priceNote.textContent = 'تم اختيار خارج الأحساء، لذلك سيتم استقبال الطلب أولًا ثم التواصل لتحديد الباقات والسعر المناسب.';
+        calculatedPrice.value = '';
+        bookingType.value = 'خارج الأحساء';
+        statusBox.className = 'status-inline show info';
+        statusBox.textContent = 'تنبيه: تسعير خارج الأحساء غير مفعّل تلقائيًا في هذه النسخة.';
+        return;
+      }
+
+      const result = getPricing(selectedPackage, barber, sabha);
+      priceComboLabel.textContent = result.combo;
+      secondGroomLabel.textContent = result.second ? `${result.second} ريال` : '—';
+      priceNote.textContent = result.note;
+      bookingType.value = result.combo;
+
+      if (!selectedPackage) {
+        finalPriceLabel.textContent = '0 ريال';
+        calculatedPrice.value = '';
+        statusBox.className = 'status-inline show info';
+        statusBox.textContent = 'اختر الباقة أولًا ليظهر السعر تلقائيًا.';
+        return;
+      }
+
+      if (result.supported) {
+        finalPriceLabel.textContent = `${result.price} ريال`;
+        calculatedPrice.value = String(result.price);
+        statusBox.className = 'status-inline';
+        statusBox.textContent = '';
+      } else {
+        finalPriceLabel.textContent = 'يحتاج مراجعة';
+        calculatedPrice.value = '';
+        statusBox.className = 'status-inline show warn';
+        statusBox.textContent = 'تركيبة حلاق + حفل فقط غير موجودة ضمن الأسعار الثابتة الحالية.';
+      }
+    }
+
+    function handleBooking(event) {
+      const locationType = document.getElementById('locationType').value;
+      const hallName = document.getElementById('hallName').value.trim();
+      const eventDate = document.getElementById('eventDate').value;
+      const selectedPackageValue = document.getElementById('selectedPackage').value.trim();
+      const barber = document.getElementById('barberAdded').value;
+      const sabha = document.getElementById('sabhaAdded').value;
+      const pricing = getPricing(selectedPackageValue, barber, sabha);
+      const successBox = document.getElementById('successMessage');
+
+      if (!locationType) {
+        alert('يرجى اختيار موقع المناسبة');
+        return false;
+      }
+      if (!hallName) {
+        alert('يرجى كتابة اسم القاعة');
+        return false;
+      }
       if (!eventDate) {
-        alert("يرجى اختيار تاريخ المناسبة من التقويم");
+        alert('يرجى اختيار تاريخ المناسبة من التقويم');
         return false;
       }
-
-      if (!customEventType) {
-        alert("يرجى كتابة نوع المناسبة بشكل واضح");
+      if (!selectedPackageValue) {
+        alert('يرجى اختيار الباقة المحجوزة');
         return false;
       }
-
-      if (eventType === "زواج") {
-        const weddingTime = document.getElementById("weddingTime").value;
-        const hallLocation = document.getElementById("hallLocation").value.trim();
-
-        if (!weddingTime || !hallLocation) {
-          alert("يرجى تعبئة وقت وموقع حفل الزفاف");
-          return false;
-        }
+      if (locationType !== 'خارج الأحساء' && !pricing.supported) {
+        alert('الاختيار الحالي غير مسعّر تلقائيًا. عدّل الاختيارات أو راجع التسعير يدويًا.');
+        return false;
       }
-
-      if (eventType === "ملكة") {
-        const malkaLocation = document.getElementById("malkaLocation").value.trim();
-        if (!malkaLocation) {
-          alert("يرجى إدخال موقع الملكة");
-          return false;
-        }
-      }
-
-      if (eventType === "حفل تخرج") {
-        const graduationPlace = document.getElementById("graduationPlace").value.trim();
-        if (!graduationPlace) {
-          alert("يرجى إدخال مكان حفل التخرج");
-          return false;
-        }
-      }
-
-      if (eventType === "مناسبة خاصة") {
-        const specialPlace = document.getElementById("specialPlace").value.trim();
-        if (!specialPlace) {
-          alert("يرجى إدخال مكان المناسبة الخاصة");
-          return false;
-        }
-
-        successBox.style.display = "block";
-        successBox.textContent = "تم استلام الطلب مبدئيًا ✅ وسيتم التواصل معك أولًا للتأكد من نوع المناسبة قبل تأكيد الحجز.";
-        alert("تم استلام الطلب مبدئيًا ✅ ولن يتم تأكيد الحجز إلا بعد التواصل معك");
-        return true;
-      }
-
-      if (!bookings[eventDate]) {
-        bookings[eventDate] = 0;
-      }
-
       if (bookings[eventDate] === 1) {
-        alert("هذا اليوم غير متاح ❌ اختر تاريخًا آخر");
+        alert('هذا اليوم غير متاح، اختر تاريخًا آخر.');
         renderCalendar();
         return false;
       }
 
       bookings[eventDate] = 1;
-      localStorage.setItem("bookings", JSON.stringify(bookings));
+      localStorage.setItem('spotlightBookings', JSON.stringify(bookings));
       renderCalendar();
 
-      successBox.style.display = "block";
-      successBox.textContent = "تم تأكيد الحجز مبدئيًا ✅ وتم إرسال البيانات إلى البريد الإلكتروني.";
-      alert("تم تأكيد الحجز ✅ وتم إرسال البيانات إلى البريد الإلكتروني");
+      successBox.style.display = 'block';
+      successBox.textContent = 'تم استلام الطلب بنجاح ✅ وتم إرسال البيانات إلى البريد الإلكتروني، كما تم فتح إشعار واتساب جاهز للمراجعة.';
+      setTimeout(openWhatsAppNotification, 400);
+      alert('تم استلام الطلب بنجاح ✅');
       return true;
     }
 
+    document.getElementById('barberDate').addEventListener('change', () => updateDayFromDate('barberDate', 'barberDay'));
+    document.getElementById('sabhaDate').addEventListener('change', () => updateDayFromDate('sabhaDate', 'sabhaDay'));
+    document.getElementById('locationType').addEventListener('change', updatePricing);
+
+    prepareDateInputs();
     renderCalendar();
-    toggleEventSections();
+    updatePricing();
   </script>
 </body>
 </html>
