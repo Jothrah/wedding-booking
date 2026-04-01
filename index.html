@@ -94,54 +94,6 @@
       max-width: 900px;
     }
 
-    .hero-brand {
-      position: relative;
-      z-index: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 18px;
-      margin-bottom: 18px;
-      text-align: center;
-      flex-wrap: wrap;
-    }
-
-    .hero-logo-wrap {
-      width: 86px;
-      height: 86px;
-      border-radius: 24px;
-      background: rgba(255,255,255,.12);
-      border: 1px solid rgba(255,255,255,.16);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 10px 28px rgba(0,0,0,.12);
-      overflow: hidden;
-      flex-shrink: 0;
-    }
-
-    .hero-logo-wrap img {
-      width: 68px;
-      height: 68px;
-      object-fit: contain;
-      display: block;
-    }
-
-    .hero-title-group {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      align-items: center;
-    }
-
-    .hero-kicker {
-      color: #f8e7a7;
-      font-size: 14px;
-      font-weight: 700;
-      letter-spacing: .2px;
-    }
-
     .hero-contact {
       margin-top: 16px;
       display: flex;
@@ -577,16 +529,8 @@
 <body>
   <div class="container">
     <div class="hero">
-      <div class="hero-brand">
-        <div class="hero-logo-wrap">
-          <img src="https://www.logoai.com/oss/icons/2021/12/02/u8tXD2V7rro6bok.png" alt="شعار سبوت لايت" />
-        </div>
-        <div class="hero-title-group">
-          <div class="hero-badge">سبوت لايت • حجز إلكتروني احترافي</div>
-          <div class="hero-kicker">نموذج حجز منظم لتنسيق الزواجات والحفلات</div>
-          <h1>مجموعة سبوت لايت لتصوير الزواجات والحفلات</h1>
-        </div>
-      </div>
+      <div class="hero-badge">سبوت لايت • حجز إلكتروني احترافي</div>
+      <h1>مجموعة سبوت لايت لتصوير الزواجات والحفلات</h1>
       <div class="hero-contact">
         <div class="hero-chip">📞 0568592602</div>
         <div class="hero-chip">🤵🏻 حجز الزواجات والحفلات</div>
@@ -941,13 +885,12 @@
         </ul>
       </div>
 
-      <input type="hidden" name="_subject" value="طلب حجز جديد من نموذج سبوت لايت" />
+      <input type="hidden" name="_subject" value="حجز جديد من استمارة سبوت لايت" />
       <input type="hidden" name="_template" value="table" />
       <input type="hidden" name="_captcha" value="false" />
-      <input type="hidden" name="_autoresponse" value="تم استلام طلب الحجز بنجاح، وسيتم التواصل معكم قريبًا لتأكيد التفاصيل." />
 
       <div class="submit-wrap">
-        <button class="btn" type="submit">إتمام الحجز</button>
+        <button class="btn" type="submit">إرسال الاستمارة</button>
         <div id="successMessage" class="success-box">تم استلام الطلب بنجاح.</div>
         <div class="foot-note">تم تحديث النسخة وفق الملاحظات الحالية، مع تسعير تلقائي حسب الباقة والاختيارات الأساسية.</div>
       </div>
@@ -973,54 +916,6 @@
     function pad(num) { return String(num).padStart(2, "0"); }
     function formatDate(year, month, day) { return `${year}-${pad(month + 1)}-${pad(day)}`; }
 
-    function buildWhatsAppMessage() {
-      const groomName = document.getElementById('groomName').value.trim() || 'غير مذكور';
-      const groomPhone = document.getElementById('groomPhone').value.trim() || 'غير مذكور';
-      const altPhone = document.getElementById('altPhone').value.trim() || 'لا يوجد';
-      const locationType = document.getElementById('locationType').value || 'غير محدد';
-      const hallName = document.getElementById('hallName').value.trim() || 'غير مذكور';
-      const eventDate = document.getElementById('eventDate').value || 'غير محدد';
-      const hijriDate = document.getElementById('hijriDate').value || 'غير محدد';
-      const gregorianDate = document.getElementById('gregorianDate').value || 'غير محدد';
-      const dayName = document.getElementById('dayName').value || 'غير محدد';
-      const selectedPackage = document.getElementById('selectedPackage').value || 'غير محددة';
-      const calculatedPrice = document.getElementById('calculatedPrice').value || 'يحتاج مراجعة';
-      const bookingType = document.getElementById('bookingType').value || 'غير محدد';
-      const barberAdded = document.getElementById('barberAdded').value || 'لا';
-      const sabhaAdded = document.getElementById('sabhaAdded').value || 'لا';
-      const droneAdded = document.getElementById('droneAdded').value || 'لا';
-      const beforeDay = document.getElementById('beforeDay').value || 'لا';
-      const extras = document.getElementById('extrasNotes').value.trim() || 'لا توجد';
-
-      return [
-        'طلب حجز جديد من نموذج سبوت لايت',
-        '',
-        `اسم العريس: ${groomName}`,
-        `رقم الجوال: ${groomPhone}`,
-        `رقم إضافي: ${altPhone}`,
-        `الموقع: ${locationType}`,
-        `اسم القاعة أو الموقع: ${hallName}`,
-        `تاريخ المناسبة: ${eventDate}`,
-        `التاريخ الهجري: ${hijriDate}`,
-        `التاريخ الميلادي: ${gregorianDate}`,
-        `اليوم: ${dayName}`,
-        `الباقة: ${selectedPackage}`,
-        `نوع الحجز: ${bookingType}`,
-        `السعر: ${calculatedPrice}`,
-        `إضافة الحلاق: ${barberAdded}`,
-        `إضافة السباحة: ${sabhaAdded}`,
-        `إضافة الدرون: ${droneAdded}`,
-        `قبل بيوم: ${beforeDay}`,
-        `الإضافات والملاحظات: ${extras}`
-      ].join('
-');
-    }
-
-    function openWhatsAppNotification() {
-      const message = buildWhatsAppMessage();
-      const url = `https://wa.me/966547338905?text=${encodeURIComponent(message)}`;
-      window.open(url, '_blank', 'noopener');
-    }
 
     function prepareDateInputs() {
       ['barberDate', 'sabhaDate'].forEach(function(id) {
@@ -1271,7 +1166,7 @@
       }
     }
 
-    function handleBooking(event) {
+    function handleBooking() {
       const locationType = document.getElementById('locationType').value;
       const hallName = document.getElementById('hallName').value.trim();
       const eventDate = document.getElementById('eventDate').value;
@@ -1312,8 +1207,7 @@
       renderCalendar();
 
       successBox.style.display = 'block';
-      successBox.textContent = 'تم استلام الطلب بنجاح ✅ وتم إرسال البيانات إلى البريد الإلكتروني، كما تم فتح إشعار واتساب جاهز للمراجعة.';
-      setTimeout(openWhatsAppNotification, 400);
+      successBox.textContent = 'تم استلام الطلب بنجاح ✅ وتم إرسال بيانات الاستمارة إلى البريد الإلكتروني.';
       alert('تم استلام الطلب بنجاح ✅');
       return true;
     }
